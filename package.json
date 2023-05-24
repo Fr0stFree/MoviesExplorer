@@ -1,0 +1,29 @@
+{
+  "name": "api-movies-explorer",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "lint": "npx eslint ."
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "celebrate": "^15.0.1",
+    "dotenv": "^16.0.3",
+    "express": "~4.16.1",
+    "express-winston": "^4.2.0",
+    "http-status": "^1.6.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3",
+    "mongoose-type-email": "^1.1.2",
+    "mongoose-type-url": "^2.1.0",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "nodemon": "^2.0.22"
+  }
+}
