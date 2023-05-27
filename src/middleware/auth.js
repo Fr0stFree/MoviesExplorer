@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const { InvalidCredentials } = require('../core/errors');
 const { SECRET_KEY } = require('../../config');
+const User = require('../users/models');
 
 module.exports = async (req, res, next) => {
 	const { authorization } = req.headers;
@@ -15,6 +16,6 @@ module.exports = async (req, res, next) => {
 	} catch (err) {
 		return next(new InvalidCredentials('Token is not valid'));
 	}
-	req.user = payload;
+	req.user = await User.getFromCache(payload.userId);
 	return next();
 };

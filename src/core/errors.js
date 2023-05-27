@@ -33,9 +33,17 @@ class PermissionDenied extends Error {
 	}
 }
 
+class PageNotFound extends Error {
+	constructor(message) {
+		super(message);
+		this.statusCode = NOT_FOUND;
+	}
+}
+
 module.exports = {
 	PermissionDenied,
 	ObjectAlreadyExist,
 	ObjectDoesNotExist,
+	PageNotFound,
 	InvalidCredentials,
 };

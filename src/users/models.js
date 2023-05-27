@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 require('mongoose-type-email');
 require('mongoose-type-url');
-const bcrypt = require('bcryptjs');
+
 
 const { InvalidCredentials } = require('../core/errors');
 
@@ -25,6 +26,18 @@ const userSchema = new mongoose.Schema({
 }, {
 	versionKey: false,
 });
+
+userSchema.statics.getFromCache = async function (id) {
+	if (!this.cache) {
+		this.cache = new Map();
+	}
+	if (this.cache.has(id)) {
+		return this.cache.get(id);
+	}
+	const result = await this.findById(id);
+	this.cache.set(id, result);
+	return result;
+};
 
 userSchema.statics.findByCredentials = async function (email, password) {
 	const user = await this.findOne({ email }).select('+password');

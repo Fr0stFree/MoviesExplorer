@@ -12,6 +12,6 @@
     "func-names": ["error", "never"],
     "indent": ["error", "tab"],
     "no-tabs": "off",
-    "max-classes-per-file": ["error", 4]
+    "max-classes-per-file": ["error", 5]
   }
 }

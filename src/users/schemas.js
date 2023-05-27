@@ -13,7 +13,7 @@ const registerSchema = {
 			.min(8),
 		name: Joi
 			.string()
-			.optional()
+			.required()
 			.min(2)
 			.max(30),
 	}),
@@ -33,7 +33,23 @@ const loginSchema = {
 	}),
 };
 
+const updateSchema = {
+	body: Joi.object().keys({
+		name: Joi
+			.string()
+			.optional()
+			.min(2)
+			.max(30),
+		email: Joi
+			.string()
+			.optional()
+			.email()
+			.lowercase(),
+	}),
+};
+
 module.exports = {
 	registerSchema,
 	loginSchema,
+	updateSchema,
 };

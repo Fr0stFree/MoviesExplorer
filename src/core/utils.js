@@ -1,7 +1,5 @@
-module.exports = (func, req, res, next) => {
-	try {
-		func(req, res, next);
-	} catch (error) {
-		next(error);
-	}
+const errorCatcher = (func) => async (req, res, next) => func(req, res, next).catch(next);
+
+module.exports = {
+	errorCatcher,
 };

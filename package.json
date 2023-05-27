@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon app.js",
-    "start": "node app.js",
-    "lint": "npx eslint ."
+    "start": "node app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

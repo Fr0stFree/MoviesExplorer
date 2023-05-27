@@ -8,10 +8,12 @@ module.exports = async (err, req, res, next) => {
 	let { message } = err;
 	if (Object.prototype.hasOwnProperty.call(err, 'statusCode')) {
 		status = err.statusCode;
-	} else if (err instanceof mongoose.Error.ValidationError
-    || err instanceof mongoose.Error.CastError) {
+	} else if (err instanceof mongoose.Error.ValidationError) {
 		status = BAD_REQUEST;
 		message = Object.values(err.errors).map((error) => error.message).join(', ');
+	} else if (err instanceof mongoose.Error.CastError) {
+		status = BAD_REQUEST;
+		message = err.message;
 	}
 	if (status === INTERNAL_SERVER_ERROR && NODE_ENV === 'production') {
 		message = 'Произошла ошибка';

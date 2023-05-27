@@ -1,4 +1,4 @@
-const { ALLOWED_METHODS, ALLOWED_URLS } = require('../../config');
+const { ALLOWED_METHODS } = require('../../config');
 
 const cors = (req, res, next) => {
 	const { method } = req;
