@@ -22,6 +22,4 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-app.listen(SERVER_PORT, async () => {
-	await connectToMongo(MONGO_DNS);
-});
+app.listen(SERVER_PORT, async () => await connectToMongo(MONGO_DNS));
