@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.use('/', userRouter);
 router.use('/movies', auth, movieRouter);
-router.use((req, res, next) => next(new PageNotFound(`Page '${req.url}' does not exist`)));
+router.use(auth, (req, res, next) => next(new PageNotFound(`Page '${req.url}' does not exist`)));
 
 module.exports = router;

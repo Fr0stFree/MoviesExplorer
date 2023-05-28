@@ -2,7 +2,7 @@ const { CREATED } = require('http-status');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const { SECRET_KEY, TOKEN_EXPIRATION } = require('../../config');
+const { SECRET_KEY, TOKEN_EXPIRATION } = require('../config');
 const { ObjectAlreadyExist } = require('../core/errors');
 const User = require('./models');
 
@@ -10,8 +10,15 @@ const retrieveSelf = async (req, res, next) => res.send(req.user);
 
 const updateSelf = async (req, res, next) => {
 	req.user.set({ ...req.body });
-	await req.user.save();
-	return res.send(req.user);
+	try {
+		await req.user.save();
+		return res.send(req.user);
+	} catch (error) {
+		if (error.name === 'MongoServerError' && error.code === 11000) {
+			throw new ObjectAlreadyExist('Email is taken.');
+		}
+		throw error;
+	}
 };
 
 const login = async (req, res, next) => {

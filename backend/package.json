@@ -1,16 +1,17 @@
 {
   "name": "api-movies-explorer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js"
+    "dev": "./node_modules/.bin/nodemon src/app.js",
+    "start": "node src/app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "celebrate": "^15.0.1",
     "dotenv": "^16.0.3",
     "express": "~4.16.1",
+    "express-rate-limit": "^6.7.0",
     "express-winston": "^4.2.0",
     "http-status": "^1.6.2",
     "jsonwebtoken": "^9.0.0",

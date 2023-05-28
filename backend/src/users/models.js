@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 require('mongoose-type-email');
 require('mongoose-type-url');
 
-
 const { InvalidCredentials } = require('../core/errors');
 
 const userSchema = new mongoose.Schema({

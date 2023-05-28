@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { BAD_REQUEST, INTERNAL_SERVER_ERROR } = require('http-status');
 
-const { NODE_ENV } = require('../../config');
+const { NODE_ENV } = require('../config');
 
 module.exports = async (err, req, res, next) => {
 	let status = INTERNAL_SERVER_ERROR;

@@ -9,8 +9,7 @@ const registerSchema = {
 			.lowercase(),
 		password: Joi
 			.string()
-			.required()
-			.min(8),
+			.required(),
 		name: Joi
 			.string()
 			.required()
@@ -28,8 +27,7 @@ const loginSchema = {
 			.lowercase(),
 		password: Joi
 			.string()
-			.required()
-			.min(8),
+			.required(),
 	}),
 };
 
@@ -37,12 +35,12 @@ const updateSchema = {
 	body: Joi.object().keys({
 		name: Joi
 			.string()
-			.optional()
+			.required()
 			.min(2)
 			.max(30),
 		email: Joi
 			.string()
-			.optional()
+			.required()
 			.email()
 			.lowercase(),
 	}),

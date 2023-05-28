@@ -1,5 +1,5 @@
 const { Joi } = require('celebrate');
-const { URL_PATTERN } = require('../../config');
+const { URL_PATTERN } = require('../config');
 
 const createSchema = {
 	body: Joi.object().keys({
@@ -33,10 +33,10 @@ const createSchema = {
 		movieId: Joi
 			.number()
 			.required(),
-		nameRu: Joi
+		nameRU: Joi
 			.string()
 			.required(),
-		nameEn: Joi
+		nameEN: Joi
 			.string()
 			.required(),
 	}),

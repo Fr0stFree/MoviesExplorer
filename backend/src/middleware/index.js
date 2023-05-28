@@ -1,7 +1,8 @@
+const { requestLogger, errorLogger } = require('./logger');
 const errorHandler = require('./errorHandler');
 const auth = require('./auth');
 const cors = require('./cors');
-const { requestLogger, errorLogger } = require('./logger');
+const rateLimiter = require('./rateLimiter');
 
 module.exports = {
 	errorHandler,
@@ -9,4 +10,5 @@ module.exports = {
 	cors,
 	errorLogger,
 	requestLogger,
+	rateLimiter,
 };
