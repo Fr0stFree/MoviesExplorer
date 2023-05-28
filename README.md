@@ -25,8 +25,6 @@ npm run dev
 docker compose up --build
 ```
 
----
-
 #### Endpoints
 
 <details>
@@ -51,7 +49,7 @@ curl -X POST http://localhost:5000/signup \
 }
 ```
 </details>
-<br>
+
 <details>
 <summary> Авторизация пользователя </summary>
 
@@ -72,7 +70,7 @@ curl -X POST http://localhost:5000/signin \
 }
 ```
 </details>
-<br>
+
 <details>
 <summary> Авторизация пользователя </summary>
 
@@ -91,7 +89,7 @@ curl -X GET http://localhost:5000/users/me \
 }
 ```
 </details>
-<br>
+
 <details>
 <summary> Редактирование пользовательских данных </summary>
 
@@ -114,7 +112,7 @@ curl -X PATCH http://localhost:5000/users/me \
 }
 ```
 </details>
-<br>
+
 <details>
 <summary> Добавление фильма в фильмотеку </summary>
 
@@ -156,7 +154,7 @@ curl -X POST http://localhost:5000/movies/ \
 }
 ```
 </details>
-<br>
+
 <details>
 <summary> Получение списка фильмов из фильмотеки </summary>
 
@@ -185,7 +183,7 @@ curl -X GET http://localhost:5000/movies/ \
 ]
 ```
 </details>
-<br>
+
 <details>
 <summary> Удаление фильма из фильмотеки </summary>
 
