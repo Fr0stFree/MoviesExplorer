@@ -194,11 +194,4 @@ curl -X DELETE http://localhost:5000/movies/6473370ef2532f5c4fd36359 \
      -H "Content-Type: application/json"
 ```
 - <u>Response</u> __204 NO CONTENT__
-```json
-{
-  "_id": "64732fe5b56e3c3be8442865",
-  "email": "not_fake_i_promise@admin.com",
-  "name": "Doe John"
-}
-```
 </details>
