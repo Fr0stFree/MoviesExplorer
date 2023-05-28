@@ -5,6 +5,7 @@ const BACKEND_DIR = path.join(APP_DIR, '../');
 const PROJECT_DIR = path.join(BACKEND_DIR, '../');
 
 require('dotenv').config({ path: path.join(PROJECT_DIR, '.env') });
+
 if (!process.env.NODE_ENV) {
 	throw new Error('NODE_ENV is not set');
 }
