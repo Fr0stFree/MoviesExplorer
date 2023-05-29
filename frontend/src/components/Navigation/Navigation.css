@@ -1,0 +1,22 @@
+.navigation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style-type: None;
+  padding: 0;
+}
+
+.navigation__link {
+  color: var(--primary-color);
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration-line: none;
+  margin-right: 16px;
+}
+
+.navigation__profile {
+  margin-left: auto;
+}
