@@ -2,28 +2,61 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import './Navigation.css';
-import profile from "../../images/profile.svg";
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+// import profile from "../../images/profile.svg";
 
 export default class Navigation extends Component {
-  render() {
+  static contextType = CurrentUserContext;
+
+
+  linkClassName = ({ isActive }) => {
+    let linkClass = "navigation__link";
+    if (isActive) {
+      linkClass += " navigation__link_active";
+    }
+    return linkClass;
+  }
+
+  navigationBarForClient = () => {
     return (
       <ul className={"navigation"}>
-        <li>
-          <NavLink to="/movies"
-                   className={"navigation__link"}
-                   activeClassName={"navigation__link_active"}>Фильмы</NavLink>
+        <li className={"navigation__item"}>
+          <NavLink to="/signup"
+                   className={this.linkClassName}>Регистрация</NavLink>
         </li>
-        <li>
-          <NavLink to="/saved-movies"
-                   className={"navigation__link"}
-                   activeClassName={"navigation__link_active"}>Сохранённые фильмы</NavLink>
+        <li className={"navigation__item"}>
+          <NavLink to="/signin"
+                   className={this.linkClassName}>Войти</NavLink>
         </li>
-        <NavLink to={"/profile"}
-                 className={"navigation__link navigation__link_profile"}
-                 activeClassName={"navigation__link_active"}>
-          <img src={profile} alt="Профиль" className={"navigation__profile"} />
-        </NavLink>
       </ul>
+    )
+  }
+
+  navigationBarForAuthUser = () => {
+    return (
+      <ul className={"navigation"}>
+        <li className={"navigation__item"}>
+          <NavLink to="/movies"
+                   className={this.linkClassName}>Фильмы</NavLink>
+        </li>
+        <li className={"navigation__item"}>
+          <NavLink to="/saved-movies"
+                   className={this.linkClassName}>Сохранённые фильмы</NavLink>
+        </li>
+        <li className={"navigation__item navigation__corner-item"}>
+          <NavLink to="/profile"
+                   className={this.linkClassName}>Профиль</NavLink>
+        </li>
+      </ul>
+    )
+  }
+
+  render() {
+    const { isAuthenticated } = this.context;
+    return (
+      <>
+        {isAuthenticated ? this.navigationBarForAuthUser() : this.navigationBarForClient()}
+      </>
     )
   }
 }

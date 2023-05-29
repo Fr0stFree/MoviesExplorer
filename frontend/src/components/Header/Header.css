@@ -1,6 +1,8 @@
 .header {
   display: flex;
   align-items: center;
+  height: 74px;
+  padding: 0 70px 0;
 }
 
 .header__logo {

@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   background-color: black;
+  height: 100%;
 }
 
 .page-not-found__title {

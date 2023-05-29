@@ -4,6 +4,16 @@
   align-items: center;
   list-style-type: None;
   padding: 0;
+  width: 100%;
+}
+
+.navigation__corner-item {
+  margin-right: auto;
+
+}
+
+.navigation__item:not(:last-child) {
+  margin-right: 16px;
 }
 
 .navigation__link {
@@ -14,9 +24,13 @@
   font-size: 13px;
   line-height: 18px;
   text-decoration-line: none;
-  margin-right: 16px;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.navigation__profile {
-  margin-left: auto;
+.navigation__link:hover {
+  opacity: 0.7;
+}
+
+.navigation__link_active {
+  font-weight: 500;
 }
