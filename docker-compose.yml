@@ -25,17 +25,6 @@ services:
         env_file:
             - .env
 
-#    frontend:
-#        build: ./frontend
-#        container_name: frontend
-#        restart: always
-#        ports:
-#            - 3000:3000
-#        networks:
-#            - app-network
-#        env_file:
-#            - .env.development.local
-
 networks:
     app-network:
         driver: bridge
