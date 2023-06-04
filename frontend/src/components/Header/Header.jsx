@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 
-import logo from '../../images/header-logo.svg';
+import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
 export default class Header extends Component {
-  render() {
-    return (
-      <header className={"header"}>
-        <img src={logo} alt="Логотип" className={"header__logo"} />
-        <Navigation />
-      </header>
-    )
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            className: `header ${this.props.extraClass}`,
+        }
+    }
+
+    render() {
+        return (
+            <header className={this.state.className}>
+                <Logo />
+                <Navigation />
+            </header>
+        )
+    }
 }

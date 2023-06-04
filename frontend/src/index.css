@@ -5,8 +5,11 @@
   --primary-color: #FFF;
   --background-main-color: #303030;
   --background-secondary-color: #202020;
+  --label-color: #8B8B8B;
+  --border-color: #424242;
   --info-color: #3DDC84;
   --danger-color: #EE3465;
+  --link-color: #4285F4;
 }
 
 .page {
@@ -22,8 +25,31 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: 0 70px 0;
 }
 
-* {
-  border: 1px red solid;
+.page__header {
+  height: 172px;
 }
+
+.page__header_none {
+  display: none;
+}
+
+.page__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.page__footer {
+  height: 172px;
+}
+
+.page__footer_none {
+  display: none;
+}
+
+/** {*/
+/*  border: 1px red solid;*/
+/*}*/

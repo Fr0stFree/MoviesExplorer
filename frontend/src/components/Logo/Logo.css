@@ -1,0 +1,10 @@
+.logo {
+  margin: 0;
+  padding: 0;
+  transition: transform .5s ease-in-out, opacity .5s ease-in-out;
+}
+
+.logo:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
