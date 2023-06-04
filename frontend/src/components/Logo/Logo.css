@@ -1,7 +1,11 @@
 .logo {
-  margin: 0;
-  padding: 0;
   transition: transform .5s ease-in-out, opacity .5s ease-in-out;
+  width: 38px;
+  height: 38px;
+}
+
+.logo_inactive {
+  visibility: hidden;
 }
 
 .logo:hover {

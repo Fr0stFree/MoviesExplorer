@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import Header from '../Header/Header';
-import Footer from "../Footer/Footer";
+import Landing from "../Landing/Landing";
 import NotFound from "../NotFound/NotFound";
+import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
-import Register from "../Auth/Register";
-import Login from "../Auth/Login";
+import Login from "../Login/Login";
 
 export default class App extends Component {
     constructor(props) {
@@ -16,9 +15,16 @@ export default class App extends Component {
             currentUser: {
                 name: "Жак-Ив Кусто",
                 email: "fake@admin.com",
-                isAuthenticated: true,
+                isAuthenticated: false,
             },
         }
+    }
+
+    handleProfileUpdate = ({ email, name }) => {
+        console.log(`Email: ${email} name: ${name}`);
+    }
+
+    handleLogout = () => {
     }
 
     handleLogin = ({ email, password }) => {
@@ -33,16 +39,13 @@ export default class App extends Component {
         return (
             <div className="page">
                 <CurrentUserContext.Provider value={this.state.currentUser}>
-                    <Header extraClass="page__header_none"/>
-                    <div className="page__content">
-                        <Routes>
-                            <Route path="/me" element={<Profile />} />
-                            <Route path="/signup" element={<Register onSubmit={this.handleLogin} />} />
-                            <Route path="/signin" element={<Login onSubmit={this.handleRegistration} />} />
-                            <Route path="*" element={<NotFound />} />
-                        </Routes>
-                    </div>
-                    <Footer extraClass="page__footer_none"/>
+                    <Routes>
+                        <Route path="/me" element={<Profile onSubmit={this.handleProfileUpdate} />} />
+                        <Route path="/signup" element={<Register onSubmit={this.handleRegistration} />} />
+                        <Route path="/signin" element={<Login onSubmit={this.handleLogin} />} />
+                        <Route path="/" element={<Landing />} />
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>
                 </CurrentUserContext.Provider>
             </div>
         );

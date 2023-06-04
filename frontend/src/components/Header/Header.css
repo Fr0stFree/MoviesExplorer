@@ -1,4 +1,10 @@
 .header {
+  height: 74px;
   display: flex;
   align-items: center;
+  margin: 0 70px;
+}
+
+.header_hidden {
+  visibility: hidden;
 }
