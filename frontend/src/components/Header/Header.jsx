@@ -7,8 +7,8 @@ import './Header.css';
 export default class Header extends Component {
     render() {
         return (
-            <header className={`header ${!this.props.isVisible ? "header_hidden" : ""}`}>
-                <Logo isVisible={this.props.isVisible} />
+            <header className="header">
+                <Logo />
                 <Navigation />
             </header>
         )

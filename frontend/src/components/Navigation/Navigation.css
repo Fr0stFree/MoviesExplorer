@@ -22,6 +22,7 @@
   line-height: 16px;
   transition: opacity 0.5s ease-in-out;
   text-decoration-line: none;
+  cursor: pointer;
 }
 
 .navigation__item:hover {

@@ -4,10 +4,6 @@
   height: 38px;
 }
 
-.logo_inactive {
-  visibility: hidden;
-}
-
 .logo:hover {
   opacity: 0.8;
   transform: scale(1.05);

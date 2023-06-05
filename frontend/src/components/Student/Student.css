@@ -1,0 +1,143 @@
+.student {
+  background-color: var(--background-secondary-color);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  color: var(--primary-color);
+  margin: 110px 70px 125px;
+  display: flex;
+  flex-direction: column;
+}
+
+.student__info-container {
+  display: grid;
+  grid-template-columns: 600px 1fr;
+  grid-auto-rows: min-content;
+  margin-bottom: 100px;
+}
+
+.student__info-title {
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #DADADA;
+  margin: 0 0 66px;
+}
+
+.student__name {
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.student__stats {
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0;
+}
+
+.student__bio {
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+}
+
+.student__github-link {
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.student__github-link:hover {
+  opacity: 0.6;
+}
+
+.student__avatar {
+  max-width: 270px;
+  max-height: 327px;
+  border-radius: 10px;
+  display: block;
+  grid-column-start: 2;
+  grid-row: 1 / 4;
+  justify-self: right;
+}
+
+.student__portfolio {
+  display: flex;
+  flex-direction: column;
+}
+
+.student__portfolio-title {
+  font-family: inherit;
+  color: var(--label-color);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0 0 50px;
+}
+
+.student__portfolio-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.student__portfolio-item {
+}
+
+.student__portfolio-item:not(:last-child) {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 19px;
+}
+
+.student__project-link {
+  color: var(--primary-color);
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.student__project-link:hover {
+  opacity: 0.6;
+}
+
+.student__project-link-arrow {
+  text-align: left;
+}
+

@@ -53,4 +53,12 @@ export default class Profile extends Interface {
         const name = this.state.fields.name.value
         this.props.onSubmit({ email, name });
     }
+
+    render() {
+        return (
+            <main className="profile">
+                {super.render()}
+            </main>
+        )
+    }
 }

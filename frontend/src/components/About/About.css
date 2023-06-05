@@ -1,9 +1,9 @@
 .about {
-  height: 608px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  background-color: var(--background-secondary-color);
   margin: 110px 70px;
   display: flex;
   flex-direction: column;
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 
 .about__title {

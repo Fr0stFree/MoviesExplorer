@@ -1,19 +1,10 @@
-.content {
+.user-interface {
   background-color: var(--background-secondary-color);
   font-family: 'Inter', Arial, Helvetica, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  padding: 70px 0;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
-
-.user-interface {
   width: 390px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  /*flex-grow: 1;*/
 }
 
 .user-interface__title {

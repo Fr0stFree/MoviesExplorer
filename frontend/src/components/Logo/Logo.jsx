@@ -7,7 +7,7 @@ import './Logo.css';
 export default class Logo extends Component {
     render() {
         return (
-            <Link to="/" className={`logo ${!this.props.isVisible ? "logo_inactive" : ""}`} >
+            <Link to="/" className="logo" >
                 <img src={logo} alt="Логотип" />
             </Link>
         )

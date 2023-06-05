@@ -39,7 +39,7 @@ export default class Interface extends Component {
     }
 
     get title() {
-        return null
+        return ""
     }
 
     get isTitleCentered() {
@@ -63,7 +63,7 @@ export default class Interface extends Component {
     }
 
     get submitButtonText() {
-        return null
+        return ""
     }
 
     get isSubmitButtonTransparent() {
@@ -71,15 +71,15 @@ export default class Interface extends Component {
     }
 
     get extraButtonText() {
-        return null
+        return ""
     }
 
     get extraButtonLinkText() {
-        return null
+        return ""
     }
 
     get extraButtonRedirectTo() {
-        return null
+        return ""
     }
 
     get isExtraButtonDanger() {
@@ -92,7 +92,6 @@ export default class Interface extends Component {
 
     render() {
         return (
-            <main className="content">
                 <secion className="user-interface">
                     <Logo isVisible={this.isLogoVisible} />
                     <h2 className={`user-interface__title ${this.isTitleCentered ? "user-interface__title_centered" : ""}`}
@@ -147,7 +146,6 @@ export default class Interface extends Component {
                         </div>
                     </form>
                 </secion>
-            </main>
         );
     }
 }

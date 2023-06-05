@@ -1,4 +1,4 @@
-.content {
+.not-found {
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   background-color: var(--background-secondary-color);
   color: var(--primary-color);
@@ -12,7 +12,7 @@
   flex-direction: column;
 }
 
-.not-found {
+.not-found__container {
   margin: auto;
   display: flex;
   flex-direction: column;

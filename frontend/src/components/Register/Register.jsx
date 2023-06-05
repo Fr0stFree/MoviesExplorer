@@ -1,5 +1,7 @@
-import Interface from "../Interface/Interface";
 import React from "react";
+
+import Interface from "../Interface/Interface";
+import "./Register.css"
 
 export default class Register extends Interface {
     get title() {
@@ -28,5 +30,13 @@ export default class Register extends Interface {
         const email = this.state.fields.email.value
         const password = this.state.fields.password.value
         this.props.onSubmit({ email, name, password });
+    }
+
+    render() {
+        return (
+            <main className="register">
+                {super.render()}
+            </main>
+        )
     }
 }

@@ -6,8 +6,8 @@ import './NotFound.css';
 export default class NotFound extends Component {
     render() {
         return (
-            <main className="content">
-                <section className="not-found">
+            <main className="not-found">
+                <section className="not-found__container">
                     <h1 className="not-found__title">404</h1>
                     <p className="not-found__subtitle">Страница не найдена</p>
                 </section>

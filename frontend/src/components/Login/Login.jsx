@@ -1,5 +1,7 @@
-import Interface from "../Interface/Interface"
 import React from "react";
+
+import Interface from "../Interface/Interface";
+import "./Login.css";
 
 export default class Login extends Interface {
     get title() {
@@ -30,6 +32,14 @@ export default class Login extends Interface {
         event.preventDefault()
         const email = this.state.fields.email.value
         const password = this.state.fields.password.value
-        this.props.onSubmit({ email, password });
+        this.props.onSubmit({email, password});
+    }
+
+    render() {
+        return (
+            <main className="login">
+                {super.render()}
+            </main>
+        )
     }
 }
