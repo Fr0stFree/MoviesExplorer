@@ -3,6 +3,7 @@
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   color: var(--primary-color);
   padding: 100px 70px;
+  margin: 0 -70px;
   display: flex;
   flex-direction: column;
 }
@@ -49,10 +50,13 @@
   margin: 0;
   padding: 0;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  column-gap: 10px;
+  gap: 10px;
 }
+
+
 
 .tech__tech-item {
   height: 60px;
@@ -80,4 +84,12 @@
   line-height: 17px;
   letter-spacing: -0.04em;
   text-decoration: none;
+}
+
+@media (max-width: 500px) {
+  .tech {
+    padding: 70px 0 0;
+    margin: 0;
+    background-color: var(--background-secondary-color);
+  }
 }

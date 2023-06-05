@@ -5,7 +5,7 @@ import "./Login.css";
 
 export default class Login extends Interface {
     get title() {
-        return 'Добро пожаловать!'
+        return 'Рады видеть!'
     }
 
     get submitButtonText() {

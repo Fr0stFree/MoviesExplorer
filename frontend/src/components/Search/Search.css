@@ -1,0 +1,118 @@
+.search {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  color: var(--primary-color);
+  margin: 60px 0 11px;
+  padding-bottom: 70px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search__switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  display: inline-block;
+}
+
+.search__bar-container {
+  width: 100%;
+  position: relative;
+  margin-bottom: 42px;
+}
+
+.search__bar-input {
+  background-color: var(--background-main-color);
+  color: var(--primary-color);
+  width: 100%;
+  border: none;
+  border-radius: 40px;
+  height: 46px;
+  padding: 0 20px;
+}
+
+.search__bar-submit {
+  color: var(--primary-color);
+  font-size: 20px;
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  right: 6px;
+  top: 6px;
+  background-color: var(--link-color);
+  border: none;
+  border-radius: 50%;
+  outline: 0;
+  cursor: pointer;
+  transition: color .4s ease-in-out, background-color .2s ease-in-out 0s, transform .15s ease-in-out;
+}
+
+.search__bar-submit:hover {
+  background-color: var(--info-color);
+  color: var(--my-soul-color);
+}
+
+.search__bar-submit:active {
+  transform: scale(0.85);
+}
+
+.search__switch-container {
+  display: flex;
+  column-gap: 12px;
+}
+
+.search__switch-description {
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 0;
+}
+
+.search__switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.search__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 34px;
+  background-color: transparent;
+  box-shadow: 0 0 10px var(--primary-color);
+  transition: .4s;
+}
+
+.search__slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--label-color);
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .search__slider {
+  box-shadow: none;
+}
+
+input:checked + .search__slider:before {
+  transform: translateX(16px);
+  background-color: var(--info-color);
+}
+

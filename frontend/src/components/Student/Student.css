@@ -2,16 +2,9 @@
   background-color: var(--background-secondary-color);
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   color: var(--primary-color);
-  margin: 110px 70px 125px;
+  margin: 110px 0 125px;
   display: flex;
   flex-direction: column;
-}
-
-.student__info-container {
-  display: grid;
-  grid-template-columns: 600px 1fr;
-  grid-auto-rows: min-content;
-  margin-bottom: 100px;
 }
 
 .student__info-title {
@@ -27,7 +20,23 @@
   margin: 0 0 66px;
 }
 
+.student__info-container {
+  display: grid;
+  grid-template-columns: 2fr minmax(120px, 1fr);
+  grid-template-rows: 2fr 1fr 5fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  grid-auto-rows: max-content;
+  grid-template-areas:
+    "name avatar"
+    "stats avatar"
+    "bio avatar"
+    "link avatar";
+  margin-bottom: 100px;
+}
+
 .student__name {
+  grid-area: name;
   color: inherit;
   font-family: inherit;
   font-style: normal;
@@ -39,6 +48,7 @@
 }
 
 .student__stats {
+  grid-area: stats;
   color: inherit;
   font-family: inherit;
   font-style: normal;
@@ -49,16 +59,18 @@
 }
 
 .student__bio {
+  grid-area: bio;
   color: inherit;
   font-family: inherit;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 22px;
-  margin: 0;
+  max-width: 600px;
 }
 
 .student__github-link {
+  grid-area: link;
   color: inherit;
   font-family: inherit;
   font-style: normal;
@@ -76,13 +88,14 @@
 }
 
 .student__avatar {
-  max-width: 270px;
-  max-height: 327px;
+  grid-area: avatar;
+  background-image: url("../../images/avatar.jpg");
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  width: 100%;
+  aspect-ratio: 3/4;
   border-radius: 10px;
-  display: block;
-  grid-column-start: 2;
-  grid-row: 1 / 4;
-  justify-self: right;
 }
 
 .student__portfolio {
@@ -107,9 +120,6 @@
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-}
-
-.student__portfolio-item {
 }
 
 .student__portfolio-item:not(:last-child) {
@@ -141,3 +151,15 @@
   text-align: left;
 }
 
+@media (max-width: 500px) {
+  .student__info-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "avatar"
+      "name"
+      "stats"
+      "bio"
+      "link";
+  }
+}

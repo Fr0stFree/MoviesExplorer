@@ -1,0 +1,67 @@
+.movie {
+  background-color: var(--background-main-color);
+  color: var(--primary-color);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  display: grid;
+  grid-template-areas:
+    "title poster"
+    "duration poster"
+    "button poster";
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto auto;
+  padding: 6px 6px 6px 22px;
+  align-items: start;
+}
+
+.movie__title {
+  font-family: inherit;
+  color: inherit;
+  grid-area: title;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.movie__duration {
+  font-family: inherit;
+  color: var(--label-color);
+  grid-area: duration;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.movie__button {
+  grid-area: button;
+  cursor: pointer;
+  border: none;
+  width: 14px;
+  height: 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+.movie__button:hover {
+  opacity: 0.6;
+}
+
+.movie__delete-button {
+  background: url(../../images/delete-button.svg) no-repeat center content-box;
+}
+
+.movie__like-button {
+  background: url(../../images/like-button.svg) no-repeat center content-box;
+}
+
+.movie__like-button_active {
+  background: url(../../images/like-button-active.svg) no-repeat center content-box;
+}
+
+.movie__poster {
+  grid-area: poster;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}

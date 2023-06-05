@@ -22,7 +22,7 @@ export default class Student extends Component {
                         <Link className="student__github-link"
                               to="https://github.com/Fr0stFree"
                         >GitHub</Link>
-                        <img className="student__avatar" src={avatar} alt="Фотография работяги" />
+                        <figure className="student__avatar"></figure>
                     </div>
                 </article>
                 <article className="student__portfolio">

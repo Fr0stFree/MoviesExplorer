@@ -1,7 +1,7 @@
 .about {
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   background-color: var(--background-secondary-color);
-  margin: 110px 70px;
+  margin: 110px 0;
   display: flex;
   flex-direction: column;
 }
@@ -25,6 +25,7 @@
   display: flex;
 }
 
+
 .about__task-title {
   margin: 0 0 26px;
   font-family: inherit;
@@ -46,7 +47,7 @@
 
 .about__progress {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: minmax(100px, 1fr) 4fr;
   grid-template-rows: 36px;
   text-align: center;
   row-gap: 14px;
@@ -80,4 +81,11 @@
 
 .about__progress-bar_type_frontend {
   background-color: var(--background-main-color);
+}
+
+@media (max-width: 500px) {
+  .about__task-list {
+    flex-direction: column;
+    row-gap: 56px;
+  }
 }

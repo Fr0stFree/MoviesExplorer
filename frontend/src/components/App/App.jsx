@@ -7,6 +7,7 @@ import NotFound from "../NotFound/NotFound";
 import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
+import Library from "../Library/Library";
 
 export default class App extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export default class App extends Component {
             currentUser: {
                 name: "Жак-Ив Кусто",
                 email: "fake@admin.com",
-                isAuthenticated: false,
+                isAuthenticated: true,
             },
         }
     }
@@ -43,6 +44,8 @@ export default class App extends Component {
                         <Route path="/me" element={<Profile onSubmit={this.handleProfileUpdate} />} />
                         <Route path="/signup" element={<Register onSubmit={this.handleRegistration} />} />
                         <Route path="/signin" element={<Login onSubmit={this.handleLogin} />} />
+                        <Route path="/library" element={<Library onlySaved={false} /> } />
+                        <Route path="/saved" element={<Library onlySaved={true}/> } />
                         <Route path="/" element={<Landing />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
