@@ -3,6 +3,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import Interface from "../Interface/Interface";
 import "./Profile.css";
+import Header from "../Header/Header";
 
 export default class Profile extends Interface {
     static contextType = CurrentUserContext;
@@ -57,6 +58,7 @@ export default class Profile extends Interface {
     render() {
         return (
             <main className="profile">
+                <Header />
                 {super.render()}
             </main>
         )

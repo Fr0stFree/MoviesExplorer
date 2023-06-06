@@ -22,7 +22,7 @@
 
 .student__info-container {
   display: grid;
-  grid-template-columns: 2fr minmax(120px, 1fr);
+  grid-template-columns: 3.5fr minmax(200px, 1fr);
   grid-template-rows: 2fr 1fr 5fr 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
@@ -32,7 +32,7 @@
     "stats avatar"
     "bio avatar"
     "link avatar";
-  margin-bottom: 100px;
+  margin-bottom: 85px;
 }
 
 .student__name {
@@ -44,7 +44,6 @@
   font-size: 50px;
   line-height: 58px;
   letter-spacing: -0.04em;
-  margin: 0;
 }
 
 .student__stats {
@@ -151,7 +150,37 @@
   text-align: left;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 800px) {
+  .student {
+    margin-top: 87px;
+    margin-bottom: 90px;
+  }
+
+  .student__name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .student__stats {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .student__bio {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .student__project-link {
+    font-size: 28px;
+  }
+
+  .student__info-container {
+    margin-bottom: 55px;
+  }
+}
+
+@media(max-width: 630px) {
   .student__info-container {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
@@ -161,5 +190,52 @@
       "stats"
       "bio"
       "link";
+    margin-bottom: 75px;
+    grid-row-gap: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .student {
+    margin-top: 75px;
+    margin-bottom: 70px;
+  }
+
+  .student__info-title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 26px;
+  }
+
+  .student__name {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .student__stats {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .student__bio {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+
+  .student__avatar {
+    margin-bottom: -15px;
+  }
+
+
+  .student__portfolio-title {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 42px;
+  }
+
+  .student__project-link {
+    font-size: 18px;
+    line-height: 28px;
   }
 }

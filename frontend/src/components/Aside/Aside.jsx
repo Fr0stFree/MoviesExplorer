@@ -30,12 +30,12 @@ export default class Aside extends Component {
                             >Главная</NavLink>
                         </li>
                         <li className="aside__menu-item">
-                            <NavLink to="/library"
+                            <NavLink to="/movies"
                                      className="aside__link"
                             >Фильмы</NavLink>
                         </li>
                         <li className="aside__menu-item">
-                            <NavLink to="/saved"
+                            <NavLink to="/saved-movies"
                                      className="aside__link"
                             >Сохраненные фильмы</NavLink>
                         </li>

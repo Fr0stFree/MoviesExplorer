@@ -83,3 +83,10 @@
   margin: 0 0 100px auto;
   border: none;
 }
+
+
+@media (max-width: 500px) {
+  .aside__menu {
+    width: 100%;
+  }
+}

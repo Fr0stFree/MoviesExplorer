@@ -47,16 +47,12 @@
 
 .tech__tech-list {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   gap: 10px;
 }
-
-
 
 .tech__tech-item {
   height: 60px;
@@ -86,10 +82,63 @@
   text-decoration: none;
 }
 
+@media (max-width: 800px) {
+  .tech {
+    padding: 90px 50px;
+    margin: 0 -50px;
+  }
+
+  .tech__title {
+    margin-bottom: 80px;
+  }
+
+  .tech__subtitle {
+    margin-bottom: 22px;
+  }
+
+  .tech__text {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 83px;
+  }
+
+  .tech__tech-link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .tech__tech-item {
+    width: 84px;
+    height: 57px;
+  }
+
+}
+
 @media (max-width: 500px) {
   .tech {
-    padding: 70px 0 0;
-    margin: 0;
+    padding: 70px 18px;
+    margin: 0 -18px;
     background-color: var(--background-secondary-color);
+  }
+
+  .tech__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 65px;
+  }
+
+  .tech__subtitle {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .tech__text {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 50px;
+  }
+
+  .tech__tech-list {
+    width: 90%;
   }
 }

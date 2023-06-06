@@ -8,8 +8,8 @@ export default class Tech extends Component {
         return (
             <section className="tech">
                 <h2 className="tech__title">Технологии</h2>
-                <h3 className="tech__subtitle">7 Технологий</h3>
-                <p className="tech__text">На курсе веб-разработки мы освоили технологии, которые применили<br/>в дипломном проекте.</p>
+                <h3 className="tech__subtitle">7 технологий</h3>
+                <p className="tech__text">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
                 <ul className="tech__tech-list">
                     <li className="tech__tech-item">
                         <Link className="tech__tech-link"

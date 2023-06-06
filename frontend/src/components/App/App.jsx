@@ -41,11 +41,11 @@ export default class App extends Component {
             <div className="page">
                 <CurrentUserContext.Provider value={this.state.currentUser}>
                     <Routes>
-                        <Route path="/me" element={<Profile onSubmit={this.handleProfileUpdate} />} />
+                        <Route path="/profile" element={<Profile onSubmit={this.handleProfileUpdate} />} />
                         <Route path="/signup" element={<Register onSubmit={this.handleRegistration} />} />
                         <Route path="/signin" element={<Login onSubmit={this.handleLogin} />} />
-                        <Route path="/library" element={<Library onlySaved={false} /> } />
-                        <Route path="/saved" element={<Library onlySaved={true}/> } />
+                        <Route path="/movies" element={<Library onlySaved={false} /> } />
+                        <Route path="/saved-movies" element={<Library onlySaved={true}/> } />
                         <Route path="/" element={<Landing />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>

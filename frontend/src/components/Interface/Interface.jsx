@@ -93,7 +93,7 @@ export default class Interface extends Component {
     render() {
         return (
             <secion className="user-interface">
-                <Logo isVisible={this.isLogoVisible} />
+                {this.isLogoVisible && <Logo />}
                 <h2 className={`user-interface__title ${this.isTitleCentered ? "user-interface__title_centered" : ""}`}
                 >{this.title}</h2>
                 <form className="user-interface__form"
@@ -138,7 +138,7 @@ export default class Interface extends Component {
                         <button type="submit"
                                 className={`user-interface__submit-button ${this.isSubmitButtonTransparent ? "user-interface__submit-button_transparent" : ""}`}
                         >{this.submitButtonText}</button>
-                        <p className="user-interface__extra">{this.extraButtonText}
+                        <p className="user-interface__extra">{this.extraButtonText}&ensp;
                             <Link className={`user-interface__extra-link ${this.isExtraButtonDanger ? " user-interface__extra-link_style_danger" : ""}`}
                                   to={this.extraButtonRedirectTo}>{this.extraButtonLinkText}
                             </Link>

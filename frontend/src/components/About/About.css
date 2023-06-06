@@ -23,6 +23,7 @@
   margin: 0 0 110px;
   padding: 0;
   display: flex;
+  column-gap: 50px;
 }
 
 
@@ -83,9 +84,69 @@
   background-color: var(--background-main-color);
 }
 
+@media (max-width: 800px) {
+  .about {
+    margin-top: 95px;
+    margin-bottom: 90px;
+  }
+
+  .about__task-list {
+    column-gap: 35px;
+    margin-bottom: 93px;
+  }
+
+  .about__task-title {
+    margin-bottom: 22px;
+  }
+
+  .about__task-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
 @media (max-width: 500px) {
+  .about {
+    margin-top: 65px;
+    margin-bottom: 70px;
+  }
+
+  .about__title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 26px;
+    margin-bottom: 60px;
+  }
+
   .about__task-list {
     flex-direction: column;
     row-gap: 56px;
+    margin-bottom: 60px;
   }
+
+  .about__task-title {
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about__task-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about__progress {
+    row-gap: 10px;
+  }
+
+  .about__progress-bar {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about__progress-title {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
 }

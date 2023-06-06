@@ -1,11 +1,12 @@
 .user-interface {
   background-color: var(--background-secondary-color);
   font-family: 'Inter', Arial, Helvetica, sans-serif;
-  max-width: 390px;
-  flex-grow: 1;
+  max-height: 560px;
+  width: 100%;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
-  padding: 0 30px;
+  flex-grow: 1;
 }
 
 .user-interface__title {
@@ -37,6 +38,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  row-gap: 16px;
 }
 
 .user-interface__button-container {
@@ -99,3 +101,36 @@
   color: var(--danger-color);
 }
 
+@media (max-width: 500px) {
+  .user-interface {
+    max-width: 260px;
+    align-items: center;
+    max-height: 685px;
+
+  }
+  .user-interface__form {
+    width: 100%;
+  }
+
+  .user-interface__title {
+    font-size: 24px;
+    line-height: 29px;
+    margin-bottom: 78px;
+  }
+
+  .user-interface__extra {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .user-interface__submit-button {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .user-interface__extra-link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+}

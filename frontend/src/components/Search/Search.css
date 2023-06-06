@@ -116,3 +116,22 @@ input:checked + .search__slider:before {
   background-color: var(--info-color);
 }
 
+@media (max-width: 800px) {
+  .search {
+    margin: 80px 0 10px;
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 500px) {
+  .search__bar-input {
+    height: 43px;
+    font-size: 11px;
+    line-height: 17px;
+  }
+
+  .search__switch-description {
+    font-size: 11px;
+    line-height: 18px;
+  }
+}

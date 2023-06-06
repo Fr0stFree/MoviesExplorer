@@ -44,23 +44,23 @@ export default class Navigation extends Component {
         return (
             <ul className="navigation__list">
                 <li className="navigation__item">
-                    <NavLink to="/library"
+                    <NavLink to="/movies"
                              className="navigation__link">Фильмы</NavLink>
                 </li>
                 <li className="navigation__item">
-                    <NavLink to="/saved"
+                    <NavLink to="/saved-movies"
                              className="navigation__link">Сохранённые фильмы</NavLink>
                 </li>
                 <li className="navigation__item navigation__item_type_profile">
-                    <NavLink to="/me"
+                    <NavLink to="/profile"
                              className="navigation__link">
-                        <img src={profile} alt="Профиль" />
+                        <img src={profile}
+                             alt="Профиль" />
                     </NavLink>
                 </li>
             </ul>
         )
     }
-
 
     render() {
         const { isAuthenticated } = this.context;

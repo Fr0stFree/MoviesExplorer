@@ -7,14 +7,14 @@
 .movies__list {
   display: flex;
   flex-direction: column;
-  row-gap: 40px;
+  row-gap: 38px;
 }
 
 .movies__more {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 0 80px;
+  padding: 57px 0 70px;
 }
 
 .movies__load-button {
@@ -41,4 +41,24 @@
 
 .movies__load-button:active {
   transform: scale(.95);
+}
+
+@media (max-width: 800px) {
+  .movies__more {
+    padding: 70px 0 70px;
+  }
+}
+
+@media (max-width: 500px) {
+  .movies {
+    padding: 35px 0 10px;
+  }
+
+  .movies__list {
+    row-gap: 10px;
+  }
+
+  .movies__load-button {
+    max-width: 240px;
+  }
 }
