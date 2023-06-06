@@ -1,6 +1,21 @@
-## API-Movies-Explorer
+## Movies-Explorer
 ### Описание проекта
 Coming soon...
+
+### Стек технологий
+- React.js
+- Express.js
+- MongoDB
+- Git + GitHub
+- Docker
+- Nginx
+- Yandex Cloud
+
+---
+
+### Frontend
+
+Ссылка на [архив](https://disk.yandex.ru/d/0P6SvcK1EgfZXA) с макетом
 
 ---
 

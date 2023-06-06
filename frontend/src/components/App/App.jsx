@@ -16,7 +16,7 @@ export default class App extends Component {
             currentUser: {
                 name: "Жак-Ив Кусто",
                 email: "fake@admin.com",
-                isAuthenticated: true,
+                isAuthenticated: false,
             },
         }
     }
