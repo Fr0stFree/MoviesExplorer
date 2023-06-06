@@ -15,7 +15,7 @@ Coming soon...
 
 ### Frontend
 
-Ссылка на [архив](https://disk.yandex.ru/d/0P6SvcK1EgfZXA) с макетом
+Ссылка на [архив](https://disk.yandex.ru/d/OhWcAXF5AZ7zyQ) с макетом в формате .fig
 
 ---
 
