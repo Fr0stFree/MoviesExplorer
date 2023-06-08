@@ -1,0 +1,10 @@
+.logo {
+  transition: transform .5s ease-in-out, opacity .5s ease-in-out;
+  width: 38px;
+  height: 38px;
+}
+
+.logo:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}

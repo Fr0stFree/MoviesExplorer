@@ -1,0 +1,241 @@
+.student {
+  background-color: var(--background-secondary-color);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  color: var(--primary-color);
+  margin: 110px 0 125px;
+  display: flex;
+  flex-direction: column;
+}
+
+.student__info-title {
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #DADADA;
+  margin: 0 0 66px;
+}
+
+.student__info-container {
+  display: grid;
+  grid-template-columns: 3.5fr minmax(200px, 1fr);
+  grid-template-rows: 2fr 1fr 5fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  grid-auto-rows: max-content;
+  grid-template-areas:
+    "name avatar"
+    "stats avatar"
+    "bio avatar"
+    "link avatar";
+  margin-bottom: 85px;
+}
+
+.student__name {
+  grid-area: name;
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+}
+
+.student__stats {
+  grid-area: stats;
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0;
+}
+
+.student__bio {
+  grid-area: bio;
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  max-width: 600px;
+}
+
+.student__github-link {
+  grid-area: link;
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.student__github-link:hover {
+  opacity: 0.6;
+}
+
+.student__avatar {
+  grid-area: avatar;
+  background-image: url("../../images/avatar.jpg");
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 10px;
+}
+
+.student__portfolio {
+  display: flex;
+  flex-direction: column;
+}
+
+.student__portfolio-title {
+  font-family: inherit;
+  color: var(--label-color);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0 0 50px;
+}
+
+.student__portfolio-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.student__portfolio-item:not(:last-child) {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 19px;
+}
+
+.student__project-link {
+  color: var(--primary-color);
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.student__project-link:hover {
+  opacity: 0.6;
+}
+
+.student__project-link-arrow {
+  text-align: left;
+}
+
+@media (max-width: 800px) {
+  .student {
+    margin-top: 87px;
+    margin-bottom: 90px;
+  }
+
+  .student__name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .student__stats {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .student__bio {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .student__project-link {
+    font-size: 28px;
+  }
+
+  .student__info-container {
+    margin-bottom: 55px;
+  }
+}
+
+@media(max-width: 630px) {
+  .student__info-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "avatar"
+      "name"
+      "stats"
+      "bio"
+      "link";
+    margin-bottom: 75px;
+    grid-row-gap: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .student {
+    margin-top: 75px;
+    margin-bottom: 70px;
+  }
+
+  .student__info-title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 26px;
+  }
+
+  .student__name {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .student__stats {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .student__bio {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+
+  .student__avatar {
+    margin-bottom: -15px;
+  }
+
+
+  .student__portfolio-title {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 42px;
+  }
+
+  .student__project-link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

@@ -1,6 +1,21 @@
-## API-Movies-Explorer
+## Movies-Explorer
 ### Описание проекта
 Coming soon...
+
+### Стек технологий
+- React.js
+- Express.js
+- MongoDB
+- Git + GitHub
+- Docker
+- Nginx
+- Yandex Cloud
+
+---
+
+### Frontend
+
+Ссылка на [макет](https://disk.yandex.ru/d/OhWcAXF5AZ7zyQ) в формате .fig
 
 ---
 
@@ -12,7 +27,7 @@ Coming soon...
 IP <u>130.193.36.150</u>
 
 #### Запуск сервиса локально
-Для запуска необходимо наличие локально установленной базы данных `mongodb ~ 4.0.4`, и пакетного 
+Для запуска необходимо наличие локально установленной базы данных `mongodb >= 4.0.4`, `node >= 18.12.1` и пакетного 
 менеджера `npm`.
 ```bash
 npm install --omit=dev
