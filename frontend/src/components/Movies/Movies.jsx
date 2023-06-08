@@ -14,7 +14,6 @@ export default class Movies extends Component {
     }
 
     buildMovie = ({ title, duration, image, isLiked }) => {
-        console.log(title, duration, image, isLiked);
         return (
             <Movie title={title}
                    duration={duration}

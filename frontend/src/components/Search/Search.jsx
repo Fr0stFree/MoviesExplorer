@@ -22,7 +22,8 @@ export default class Search extends Component {
                         <input className="search__bar-input"
                                onChange={this.handleChange}
                                type="search"
-                               placeholder="Фильм" />
+                               placeholder="Фильм"
+                               required />
                         <input onClick={this.handleSubmit}
                                className="search__bar-submit"
                                type="submit"

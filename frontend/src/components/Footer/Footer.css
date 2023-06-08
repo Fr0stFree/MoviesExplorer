@@ -2,8 +2,12 @@
   color: var(--primary-color);
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   margin: 79px 0 20px;
+  padding: 0 70px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  min-width: 320px;
 }
 
 .footer__text {
@@ -45,15 +49,13 @@
 
 @media (max-width: 800px) {
   .footer {
-    margin-right: -20px;
-    margin-left: -20px;
+    padding: 0 40px;
   }
 }
 
 @media (max-width: 500px) {
   .footer {
-      margin-right: -5px;
-      margin-left: -5px;
+    padding: 0 10px;
   }
 
   .footer__item-list {

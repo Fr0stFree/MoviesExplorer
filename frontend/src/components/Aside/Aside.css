@@ -60,6 +60,10 @@
   transition: opacity 0.5s ease-in-out;
 }
 
+.aside__link.active {
+  border-bottom: 3px solid rgba(255, 255, 255, 0.5);
+}
+
 .aside__link:hover {
   opacity: 0.6;
 }

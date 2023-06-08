@@ -63,7 +63,13 @@ export default class Navigation extends Component {
     }
 
     render() {
-        const { isAuthenticated } = this.context;
+        // const { isAuthenticated } = this.context;
+        // for testing purposes
+        let isAuthenticated = true
+        if (window.location.href.endsWith('/')) {
+            isAuthenticated = false
+        }
+
         return (
             <nav className="navigation">
                 <Logo />

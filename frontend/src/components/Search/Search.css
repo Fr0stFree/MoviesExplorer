@@ -34,6 +34,11 @@
   border-radius: 40px;
   height: 46px;
   padding: 0 20px;
+  outline: none;
+}
+.search__bar-input:focus {
+  border-color: var(--border-color);
+  box-shadow: 0 0 10px var(--label-color);
 }
 
 .search__bar-submit {

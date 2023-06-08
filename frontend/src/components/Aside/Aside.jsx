@@ -40,7 +40,7 @@ export default class Aside extends Component {
                             >Сохраненные фильмы</NavLink>
                         </li>
                         <li className="aside__menu-item">
-                            <NavLink to="/me"
+                            <NavLink to="/profile"
                                      className="aside__link">
                                 <img src={profile} alt="Профиль" />
                             </NavLink>

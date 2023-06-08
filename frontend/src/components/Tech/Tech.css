@@ -111,13 +111,19 @@
     width: 84px;
     height: 57px;
   }
+}
 
+@media (max-width: 800px) {
+  .tech {
+    padding: 100px 40px;
+    margin: 0 -40px;
+  }
 }
 
 @media (max-width: 500px) {
   .tech {
-    padding: 70px 18px;
-    margin: 0 -18px;
+    padding: 70px 10px;
+    margin: 0 -10px;
     background-color: var(--background-secondary-color);
   }
 
@@ -139,6 +145,6 @@
   }
 
   .tech__tech-list {
-    width: 90%;
+    padding: 0 20px;
   }
 }

@@ -11,14 +11,16 @@ import './Landing.css';
 export default class Landing extends Component {
     render() {
         return (
-            <main className="landing">
+            <>
                 <Header />
-                <Intro />
-                <About />
-                <Tech />
-                <Student />
+                <main className="landing">
+                    <Intro />
+                    <About />
+                    <Tech />
+                    <Student />
+                </main>
                 <Footer />
-            </main>
+            </>
         )
     }
 }

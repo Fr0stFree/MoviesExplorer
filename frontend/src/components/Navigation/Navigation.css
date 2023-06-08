@@ -56,6 +56,10 @@
   text-decoration: none;
 }
 
+.navigation__link.active {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+}
+
 .navigation__link_style_button {
   color: var(--my-soul-color);
 }

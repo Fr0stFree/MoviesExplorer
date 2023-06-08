@@ -10,12 +10,14 @@ import './Library.css';
 export default class Library extends Component {
     render() {
         return (
-            <main className="library">
+            <>
                 <Header />
-                <Search />
-                <Movies onlySaved={this.props.onlySaved}/>
+                <main className="library">
+                    <Search />
+                    <Movies onlySaved={this.props.onlySaved}/>
+                </main>
                 <Footer />
-            </main>
+            </>
         )
     }
 }

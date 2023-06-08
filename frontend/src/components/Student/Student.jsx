@@ -7,7 +7,7 @@ import "./Student.css";
 export default class Student extends Component {
     render() {
         return (
-            <section className="student">
+            <section className="student" id="student">
                 <article className="student__info">
                     <h2 className="student__info-title">Студент</h2>
                     <div className="student__info-container">
@@ -20,6 +20,7 @@ export default class Student extends Component {
                             После того, как прошёл курс по веб-разработке, начал заниматься ерундой и ушёл в запой.
                         </p>
                         <Link className="student__github-link"
+                              target="_blank"
                               to="https://github.com/Fr0stFree"
                         >GitHub</Link>
                         <figure className="student__avatar"></figure>
@@ -30,17 +31,20 @@ export default class Student extends Component {
                     <ul className="student__portfolio-list">
                         <li className="student__portfolio-item">
                             <Link className="student__project-link"
+                                  target="_blank"
                                   to="https://github.com/Fr0stFree/Website-Teammates"
                             >Статичный сайт<span className="student__project-link-arrow">↗</span></Link>
 
                         </li>
                         <li className="student__portfolio-item">
                             <Link className="student__project-link"
+                                  target="_blank"
                                   to="https://github.com/Fr0stFree/Yandex-Frontend-Sprint-3"
                             >Адаптивный сайт<span className="student__project-link-arrow">↗</span></Link>
                         </li>
                         <li className="student__portfolio-item">
                             <Link className="student__project-link"
+                                  target="_blank"
                                   to="https://github.com/Fr0stFree/Yandex-Frontend-Sprint-14"
                             >Одностраничное приложение<span className="student__project-link-arrow">↗</span></Link>
                         </li>
