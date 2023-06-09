@@ -32,7 +32,7 @@ export default class Login extends Interface {
         event.preventDefault()
         const email = this.state.fields.email.value
         const password = this.state.fields.password.value
-        this.props.onSubmit({email, password});
+        this.props.onSubmit({ email, password });
     }
 
     render() {

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { BACKEND_URL } from '../../config';
+import MainApi from "../../utils/MainApi";
 import Landing from "../Landing/Landing";
 import NotFound from "../NotFound/NotFound";
 import Register from "../Register/Register";
@@ -12,6 +14,12 @@ import Library from "../Library/Library";
 export default class App extends Component {
     constructor(props) {
         super(props);
+        this.mainApi = new MainApi({
+            baseUrl: BACKEND_URL,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
         this.state = {
             currentUser: {
                 name: "Жак-Ив Кусто",
@@ -28,12 +36,12 @@ export default class App extends Component {
     handleLogout = () => {
     }
 
-    handleLogin = ({ email, password }) => {
-        console.log(`Email: ${email} Password: ${password}`);
+    handleLogin = async ({ email, password }) => {
+        const response = await this.mainApi.login({ email, password })
     }
 
-    handleRegistration = ({ name, email, password }) => {
-        console.log(`Name: ${name} Email: ${email} Password: ${password}`);
+    handleRegistration = async ({ name, email, password }) => {
+        const response = await this.mainApi.register({ email, password })
     }
 
     render() {
