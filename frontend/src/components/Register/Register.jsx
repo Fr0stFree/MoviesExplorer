@@ -30,6 +30,8 @@ export default class Register extends Interface {
         const email = this.state.fields.email.value
         const password = this.state.fields.password.value
         this.props.onSubmit({ email, name, password });
+    //     clear form
+
     }
 
     render() {

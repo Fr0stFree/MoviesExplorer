@@ -2,30 +2,15 @@ import React, { Component } from 'react';
 
 import './Movie.css';
 
-
 export default class Movie extends Component {
-    handleToggleLike = (event) => {
-        if (event.target.classList.contains('movie__like-button_active')) {
-            event.target.classList.remove('movie__like-button_active');
-            // this.props.onDislike();
-        } else {
-            event.target.classList.add('movie__like-button_active');
-            // this.props.onLike();
-        }
-    }
-
-    handleDelete = (event) => {
-        // this.props.onDelete();
+    constructor(props) {
+        super(props);
     }
 
     get likeButton() {
-        let className = "movie__button movie__like-button";
-        if (this.props.isLiked) {
-            className += " movie__like-button_active";
-        }
         return (
-            <button className={className}
-                    onClick={this.handleToggleLike}>
+            <button className={`movie__button movie__like-button ${this.props.movie.isLiked ? "movie__like-button_active" : ""}`}
+                    onClick={async () => this.props.onToggleLike(this.props.movie)}>
             </button>
         )
     }
@@ -33,7 +18,7 @@ export default class Movie extends Component {
     get deleteButton() {
         return (
             <button className="movie__button movie__delete-button"
-                    onClick={this.handleDelete}>
+                    onClick={async () => await this.props.onDelete(this.props.movie)}>
             </button>
         )
     }
@@ -41,10 +26,10 @@ export default class Movie extends Component {
     render() {
         return (
             <article className="movie">
-                <h3 className="movie__title">{this.props.title}</h3>
-                <p className="movie__duration">{this.props.duration}</p>
+                <h3 className="movie__title">{this.props.movie.nameRU}</h3>
+                <p className="movie__duration">{this.props.movie.duration}</p>
                 {this.props.buttonType === "like" ? this.likeButton : this.deleteButton}
-                <img className="movie__poster" src={this.props.image} alt={this.props.title} />
+                <img className="movie__poster" src={this.props.movie.image} alt={this.props.movie.nameRU} />
             </article>
         )
     }

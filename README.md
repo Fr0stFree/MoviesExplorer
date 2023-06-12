@@ -17,6 +17,8 @@ Coming soon...
 
 Ссылка на [макет](https://disk.yandex.ru/d/OhWcAXF5AZ7zyQ) в формате .fig
 
+Ссылка на [пулл-реквест](https://github.com/Fr0stFree/Website-Movies-Explorer/pull/5)
+
 ---
 
 ### Backend

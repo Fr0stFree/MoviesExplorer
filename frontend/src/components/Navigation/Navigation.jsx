@@ -63,24 +63,15 @@ export default class Navigation extends Component {
     }
 
     render() {
-        // const { isAuthenticated } = this.context;
-        // for testing purposes
-        let isAuthenticated = true
-        if (window.location.href.endsWith('/')) {
-            isAuthenticated = false
-        }
-
         return (
             <nav className="navigation">
                 <Logo />
                 <Aside onClose={this.closeAsideMenu}
-
                        isOpen={this.state.isAsideOpen} />
                 <button className="navigation__item navigation__dropdown-menu-button"
                         onClick={this.openAsideMenu}>
                 </button>
-                {isAuthenticated ? this.navigationBarForAuthUser
-                                 : this.navigationBarForClient}
+                {this.context.isAuthenticated ? this.navigationBarForAuthUser : this.navigationBarForClient}
             </nav>
         )
     }

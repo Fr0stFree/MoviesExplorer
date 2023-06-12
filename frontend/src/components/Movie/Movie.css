@@ -62,8 +62,8 @@
 .movie__poster {
   grid-area: poster;
   aspect-ratio: 16/9;
-  object-fit: contain;
-  width: 100%;
+  object-fit: cover;
+  width: min(100%, 220px);
   height: 100%;
 }
 
@@ -91,6 +91,10 @@
 
   .movie__button {
     margin-left: auto;
+  }
+
+  .movie__poster {
+    width: 100%;
   }
 
 }

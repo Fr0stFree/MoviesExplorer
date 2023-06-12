@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import Interface from "../Interface/Interface";
-import "./Profile.css";
 import Header from "../Header/Header";
+import "./Profile.css";
 
 export default class Profile extends Interface {
     static contextType = CurrentUserContext;
@@ -55,12 +55,16 @@ export default class Profile extends Interface {
         this.props.onSubmit({ email, name });
     }
 
+    handleExtraButtonClick() {
+        this.props.onExtraButtonClick();
+    }
+
     render() {
         return (
-            <main className="profile">
+            <>
                 <Header />
-                {super.render()}
-            </main>
+                <main className="profile">{super.render()}</main>
+            </>
         )
     }
 }

@@ -1,9 +1,11 @@
-import { InvalidCredentials } from "./errors";
+import config from '../config';
 
 export default class MainApi {
-    constructor({ baseUrl, headers }) {
-        this._baseUrl = baseUrl;
-        this._headers = headers;
+    constructor() {
+        this._baseUrl = config.BACKEND_URL;
+        this._headers = {
+            'Content-Type': 'application/json',
+        }
     }
 
     async verifyToken (token) {

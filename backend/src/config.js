@@ -17,12 +17,12 @@ module.exports = {
 	LOG_DIR: path.join(BACKEND_DIR, 'logs'),
 	ALLOWED_METHODS: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 	ALLOWED_URLS: [
-		'http://localhost',
+		'*',
 	],
 	TOKEN_EXPIRATION: '7d',
 	NODE_ENV: process.env.NODE_ENV,
-	SECRET_KEY: process.env.SECRET_KEY || 'SOMETHING-REALLY-SECRET',
-	MONGO_DNS: process.env.MONGO_DNS || 'mongodb://localhost:27017/bitfilmsdb',
-	SERVER_PORT: process.env.SERVER_PORT || 5000,
+	SECRET_KEY: process.env.SECRET_KEY,
+	MONGO_DNS: process.env.MONGO_DNS,
+	SERVER_PORT: process.env.SERVER_PORT,
 	URL_PATTERN: /^https?:(www\.)?[a-zа-яё\d\-._~:/?#[\]@!$&'()*+,;=]+#?$/i,
 };

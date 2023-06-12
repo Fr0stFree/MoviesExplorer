@@ -62,6 +62,12 @@
   margin-bottom: 16px;
 }
 
+.user-interface__submit-button:disabled {
+  opacity: 0.5;
+  background-color: var(--border-color);
+  cursor: default;
+}
+
 .user-interface__submit-button_transparent {
   background-color: transparent;
 }

@@ -1,32 +1,27 @@
 version: '3.7'
 
 services:
-    db:
+    mongo:
         image: mongo:4.0.4
         container_name: db
         restart: always
-        ports:
-            - '27017:27017'
         volumes:
             - ./data/db:/data/db
-        networks:
-            - app-network
+        hostname: mongo
 
-    backend:
+    express:
         build: ./backend
         container_name: backend
         restart: always
         ports:
-            - 5000:5000
+            - '5000:5000'
         depends_on:
-            - db
-        networks:
-            - app-network
+            - mongo
+        hostname: express
+        links:
+            - mongo
         env_file:
             - .env
 
-networks:
-    app-network:
-        driver: bridge
 
 
