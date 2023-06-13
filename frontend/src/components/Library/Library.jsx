@@ -26,7 +26,7 @@ export default class Library extends Component {
         this.setState({ isLoading: true });
         try {
             const [ remoteMovies, localMovies ] = await Promise.all([this.moviesApi.getRemoteMovies(), this.moviesApi.getSavedMovies()]);
-            remoteMovies.map(movie => {
+            remoteMovies.forEach(movie => {
                 movie.isLiked = Boolean(localMovies.find(localMovie => localMovie.movieId === movie.movieId))
                 movie._id = localMovies.find(localMovie => localMovie.movieId === movie.movieId)?._id;
             });
@@ -47,7 +47,7 @@ export default class Library extends Component {
         if (prevProps.onlySaved !== this.props.onlySaved) {
             this.setState({ isLoading: true });
             if (this.props.onlySaved) {
-                this.setState({ movies: this.state.movies.filter(movie => movie.isLiked) });
+                this.setState({ movies: this.allMovies.filter(movie => movie.isLiked) });
             } else {
                 this.setState({ movies: this.allMovies.slice(0, this.preloadMoviesAmount) });
             }
@@ -57,9 +57,7 @@ export default class Library extends Component {
 
     _filterMovies = async (movies, { query, onlyShort }) => {
         let result = movies.filter(movie => movie.nameRU.toLowerCase().includes(query.toLowerCase()) || movie.nameEN.toLowerCase().includes(query.toLowerCase()));
-        if (onlyShort) {
-            result = result.filter(movie => movie.duration <= 40);
-        }
+        onlyShort && result.filter(movie => movie.duration <= 40);
         return result;
     }
 
@@ -69,7 +67,7 @@ export default class Library extends Component {
             this.filteredMovies = await this._filterMovies(this.allMovies, { query, onlyShort });
             this.setState({ movies: this.filteredMovies.splice(0, this.preloadMoviesAmount) });
         } catch (error) {
-            console.log(error.message);
+            this.props.onError(error.message)
         } finally {
             this.setState({ isLoading: false });
         }
@@ -88,13 +86,11 @@ export default class Library extends Component {
     handleToggleLike = async (movie) => {
         try {
             if (movie.isLiked) {
-                console.log(movie)
                 await this.moviesApi.deleteMovie(movie);
                 movie.isLiked = false;
                 movie._id = null;
             } else {
                 const savedMovie = await this.moviesApi.saveMovie(movie);
-                console.log(movie)
                 movie.isLiked = true;
                 movie._id = savedMovie._id;
             }
@@ -134,12 +130,11 @@ export default class Library extends Component {
                     <Search onSubmit={this.handleSearch} />
                     <section className="library__movies">
                         <ul className="library__movies-list">
-                            {this.state.movies.map(movie => <li key={movie.id} className="library__movies-item">
+                            {this.state.movies.map(movie => <li key={movie.movieId} className="library__movies-item">
                                 <Movie movie={movie}
                                        onToggleLike={this.handleToggleLike}
                                        onDelete={this.handleDelete}
-                                       buttonType={this.props.onlySaved ? "delete" : "like"}>
-                                </Movie>
+                                       buttonType={this.props.onlySaved ? "delete" : "like"} />
                             </li>)}
                         </ul>
                         <article className="library__more">

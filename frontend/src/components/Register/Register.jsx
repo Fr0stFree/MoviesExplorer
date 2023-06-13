@@ -2,8 +2,12 @@ import React from "react";
 
 import Interface from "../Interface/Interface";
 import "./Register.css"
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import {Navigate} from "react-router-dom";
 
 export default class Register extends Interface {
+    static contextType = CurrentUserContext;
+
     get title() {
         return 'Добро пожаловать!'
     }
@@ -30,15 +34,12 @@ export default class Register extends Interface {
         const email = this.state.fields.email.value
         const password = this.state.fields.password.value
         this.props.onSubmit({ email, name, password });
-    //     clear form
 
     }
 
     render() {
         return (
-            <main className="register">
-                {super.render()}
-            </main>
+          this.context.isAuthenticated ? <Navigate to="/profile" replace={true} /> : <main className="register">{super.render()}</main>
         )
     }
 }

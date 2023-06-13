@@ -22,6 +22,3 @@ services:
             - mongo
         env_file:
             - .env
-
-
-

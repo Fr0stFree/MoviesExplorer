@@ -1,5 +1,7 @@
-export default {
-    BACKEND_URL: 'http://localhost:5000',
-    MOVIES_URL: 'https://api.nomoreparties.co',
+const config = {
+    BACKEND_URL: process.env.REACT_APP_BACKEND_URL ,
+    MOVIES_URL: process.env.REACT_APP_MOVIES_URL,
 }
+
+export default config;
 

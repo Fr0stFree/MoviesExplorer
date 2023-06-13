@@ -70,7 +70,8 @@ export default class App extends Component {
 
     handleRegistration = async ({ name, email, password }) => {
         try {
-            const response = await this.mainApi.register({ name, email, password });
+            await this.mainApi.register({ name, email, password });
+            this.openTooltip(`Welcome, ${name}`);
         } catch (error) {
             this.openTooltip(error.message);
         }
@@ -80,6 +81,7 @@ export default class App extends Component {
         try {
             const response = await this.mainApi.update({ email, name });
             this.setState({ currentUser: { ...response, isAuthenticated: true } });
+            this.openTooltip('Changes have been made')
         } catch (error) {
             this.openTooltip(error.message);
         }
@@ -92,29 +94,24 @@ export default class App extends Component {
             <div className="page">
                 <CurrentUserContext.Provider value={this.state.currentUser}>
                     <Routes>
-                        <Route path="/signup" element={
-                            <Protected condition={!this.state.currentUser.isAuthenticated} navigateTo="/profile">
-                                <Register onSubmit={this.handleRegistration} />
-                            </Protected>} >
-                        </Route>
-                        <Route path="/signin" element={
-                            <Protected condition={!this.state.currentUser.isAuthenticated} navigateTo="/profile">
-                                <Login onSubmit={this.handleLogin} />
-                            </Protected>} >
-                        </Route>
+                        <Route path="/signup" element={<Register onSubmit={this.handleRegistration} />} />
+                        <Route path="/signin" element={<Login onSubmit={this.handleLogin} />} />
                         <Route path="/profile" element={
-                            <Protected condition={this.state.currentUser.isAuthenticated} navigateTo="/signin">
-                                <Profile onSubmit={this.handleProfileUpdate} onExtraButtonClick={this.handleLogout} />
+                            <Protected  navigateTo="/signin">
+                                <Profile onSubmit={this.handleProfileUpdate}
+                                         onExtraButtonClick={this.handleLogout} />
                             </Protected>} >
                         </Route>
                         <Route path="/movies" element={
-                            <Protected condition={this.state.currentUser.isAuthenticated} navigateTo="/signin">
-                                <Library onlySaved={false} onError={(message) => this.openTooltip(message)} />
+                            <Protected navigateTo="/signin">
+                                <Library onlySaved={false}
+                                         onError={(message) => this.openTooltip(message)} />
                             </Protected>} >
                         </Route>
                         <Route path="/saved-movies" element={
-                            <Protected condition={this.state.currentUser.isAuthenticated} navigateTo="/signin">
-                                <Library onlySaved={true} onError={(message) => this.openTooltip(message)} />
+                            <Protected navigateTo="/signin">
+                                <Library onlySaved={true}
+                                         onError={(message) => this.openTooltip(message)} />
                             </Protected>} >
                         </Route>
                         <Route path="/" element={<Landing />} />
