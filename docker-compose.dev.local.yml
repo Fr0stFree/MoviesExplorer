@@ -27,4 +27,4 @@ services:
         links:
             - mongo
         env_file:
-            - .env
+            - .env.example
