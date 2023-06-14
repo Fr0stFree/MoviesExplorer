@@ -34,7 +34,6 @@ export default class Login extends Interface {
 
     handleSubmit(event) {
         event.preventDefault()
-        console.log(process.env)
         const email = this.state.fields.email.value
         const password = this.state.fields.password.value
         this.props.onSubmit({ email, password });

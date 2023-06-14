@@ -9,6 +9,12 @@ services:
             - ./data/db:/data/db
         hostname: mongo
 
+    react:
+        build: ./frontend
+        container_name: frontend
+        ports:
+            - '3000:80'
+
     express:
         build: ./backend
         container_name: backend

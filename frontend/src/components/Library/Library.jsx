@@ -55,16 +55,21 @@ export default class Library extends Component {
         }
     }
 
-    _filterMovies = async (movies, { query, onlyShort }) => {
+    _filterMovies = (movies, { query, onlyShort, onlyLiked = false }) => {
         let result = movies.filter(movie => movie.nameRU.toLowerCase().includes(query.toLowerCase()) || movie.nameEN.toLowerCase().includes(query.toLowerCase()));
-        onlyShort && result.filter(movie => movie.duration <= 40);
+        if (onlyShort) {
+            result = result.filter(movie => movie.duration <= 40);
+        }
+        if (onlyLiked) {
+            result = result.filter(movie => movie.isLiked)
+        }
         return result;
     }
 
     handleSearch = async ({ query, onlyShort }) => {
         this.setState({ isLoading: true, movies: [] });
         try {
-            this.filteredMovies = await this._filterMovies(this.allMovies, { query, onlyShort });
+            this.filteredMovies = this._filterMovies(this.allMovies, { query, onlyShort, onlyLiked: this.props.onlySaved});
             this.setState({ movies: this.filteredMovies.splice(0, this.preloadMoviesAmount) });
         } catch (error) {
             this.props.onError(error.message)
