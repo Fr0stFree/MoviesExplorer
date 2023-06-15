@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {
     PRELOAD_MOVIES_AMOUNT,
     AFTERLOAD_MOVIES_AMOUNT,
-    SHORT_MOVIE_DURATION,
 } from "../../utils/constants";
 import { searchMovies, loadMovies } from "../../utils/functions";
 import MoviesApi from "../../utils/moviesApi";
@@ -20,12 +19,11 @@ export default class Library extends Component {
         this.allMovies = []
         this.filteredMovies = []
         this.moviesApi = new MoviesApi();
-        const { query = '', onlyShort = false } = JSON.parse(localStorage.getItem("searchQuery"))
         this.state = {
             isLoading: false,
             movies: [],
-            query: query || '',
-            onlyShort: onlyShort || false,
+            query: JSON.parse(localStorage.getItem("searchQuery"))?.query || '',
+            onlyShort: JSON.parse(localStorage.getItem("searchQuery"))?.onlyShort || false,
         }
     }
 
@@ -33,12 +31,10 @@ export default class Library extends Component {
         this.setState({ isLoading: true });
         try {
             this.allMovies = await loadMovies();
+            this.filteredMovies = searchMovies(this.allMovies, { onlyShort: this.state.onlyShort, onlyLiked: this.props.onlySaved });
             if (this.props.onlySaved) {
-                this.filteredMovies = searchMovies(this.allMovies, { onlyShort: this.state.onlyShort, onlyLiked: true });
-                console.log(this.filteredMovies)
                 this.setState({ movies: this.filteredMovies });
             } else {
-                this.filteredMovies = searchMovies(this.allMovies, { onlyShort: this.state.onlyShort, onlyLiked: false })
                 this.setState({ movies: this.filteredMovies.splice(0, PRELOAD_MOVIES_AMOUNT) });
             }
         } catch (error) {
@@ -49,21 +45,12 @@ export default class Library extends Component {
     }
 
     componentDidUpdate = async (prevProps, prevState) => {
-        if (prevProps.onlySaved !== this.props.onlySaved) {
+        if ((prevProps.onlySaved !== this.props.onlySaved) || (prevState.onlyShort !== this.state.onlyShort)) {
             this.filteredMovies = searchMovies(this.allMovies, { onlyShort: this.state.onlyShort, onlyLiked: this.props.onlySaved });
             if (this.props.onlySaved) {
                 this.setState({ movies: this.filteredMovies });
             } else {
                 this.setState({ movies: this.filteredMovies.splice(0, PRELOAD_MOVIES_AMOUNT) });
-            }
-
-        } else if (prevState.onlyShort !== this.state.onlyShort) {
-            if (this.state.onlyShort) {
-                this.beforeShortFilter = this.state.movies;
-                this.setState({ movies: this.state.movies.filter(movie => movie.duration <= SHORT_MOVIE_DURATION) });
-            } else {
-                this.beforeShortFilter = this.beforeShortFilter || [];
-                this.setState({ movies: this.beforeShortFilter });
             }
         }
     }
