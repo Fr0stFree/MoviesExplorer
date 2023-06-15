@@ -33,7 +33,7 @@
   column-gap: 20px;
 }
 
-.footer__item {
+.footer__item-text {
   color: inherit;
   font-family: inherit;
   font-style: normal;
@@ -42,6 +42,25 @@
   line-height: 16px;
   text-align: right;
 }
+
+.footer__link {
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: right;
+  cursor: pointer;
+  transition: opacity .4s linear;
+  text-decoration: none;
+}
+
+.footer__link:hover {
+  opacity: .6;
+}
+
+
 
 .footer__item:first-child {
   margin-right: auto;

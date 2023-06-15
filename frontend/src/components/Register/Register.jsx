@@ -39,7 +39,7 @@ export default class Register extends Interface {
 
     render() {
         return (
-          this.context.isAuthenticated ? <Navigate to="/profile" replace={true} /> : <main className="register">{super.render()}</main>
+          this.context.isAuthenticated ? <Navigate to="/movies" replace={true} /> : <main className="register">{super.render()}</main>
         )
     }
 }

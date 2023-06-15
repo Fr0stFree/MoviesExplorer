@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 
+import {
+    PRELOAD_MOVIES_AMOUNT,
+    AFTERLOAD_MOVIES_AMOUNT,
+    SHORT_MOVIE_DURATION,
+} from "../../utils/constants";
+import { searchMovies, loadMovies } from "../../utils/functions";
 import MoviesApi from "../../utils/moviesApi";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -11,30 +17,29 @@ import './Library.css';
 export default class Library extends Component {
     constructor(props) {
         super(props);
-        this.preloadMoviesAmount = 5;
-        this.afterloadMoviesAmount = 3;
         this.allMovies = []
         this.filteredMovies = []
         this.moviesApi = new MoviesApi();
+        const { query = '', onlyShort = false } = JSON.parse(localStorage.getItem("searchQuery"))
         this.state = {
             isLoading: false,
             movies: [],
+            query: query || '',
+            onlyShort: onlyShort || false,
         }
     }
 
     componentDidMount = async () => {
         this.setState({ isLoading: true });
         try {
-            const [ remoteMovies, localMovies ] = await Promise.all([this.moviesApi.getRemoteMovies(), this.moviesApi.getSavedMovies()]);
-            remoteMovies.forEach(movie => {
-                movie.isLiked = Boolean(localMovies.find(localMovie => localMovie.movieId === movie.movieId))
-                movie._id = localMovies.find(localMovie => localMovie.movieId === movie.movieId)?._id;
-            });
-            this.allMovies = remoteMovies;
+            this.allMovies = await loadMovies();
             if (this.props.onlySaved) {
-                this.setState({ movies: this.allMovies.filter(movie => movie.isLiked) });
+                this.filteredMovies = searchMovies(this.allMovies, { onlyShort: this.state.onlyShort, onlyLiked: true });
+                console.log(this.filteredMovies)
+                this.setState({ movies: this.filteredMovies });
             } else {
-                this.setState({ movies: this.allMovies.slice(0, this.preloadMoviesAmount) });
+                this.filteredMovies = searchMovies(this.allMovies, { onlyShort: this.state.onlyShort, onlyLiked: false })
+                this.setState({ movies: this.filteredMovies.splice(0, PRELOAD_MOVIES_AMOUNT) });
             }
         } catch (error) {
             this.props.onError(error.message);
@@ -45,44 +50,54 @@ export default class Library extends Component {
 
     componentDidUpdate = async (prevProps, prevState) => {
         if (prevProps.onlySaved !== this.props.onlySaved) {
-            this.setState({ isLoading: true });
+            this.filteredMovies = searchMovies(this.allMovies, { onlyShort: this.state.onlyShort, onlyLiked: this.props.onlySaved });
             if (this.props.onlySaved) {
-                this.setState({ movies: this.allMovies.filter(movie => movie.isLiked) });
+                this.setState({ movies: this.filteredMovies });
             } else {
-                this.setState({ movies: this.allMovies.slice(0, this.preloadMoviesAmount) });
+                this.setState({ movies: this.filteredMovies.splice(0, PRELOAD_MOVIES_AMOUNT) });
             }
-            this.setState({ isLoading: false });
+
+        } else if (prevState.onlyShort !== this.state.onlyShort) {
+            if (this.state.onlyShort) {
+                this.beforeShortFilter = this.state.movies;
+                this.setState({ movies: this.state.movies.filter(movie => movie.duration <= SHORT_MOVIE_DURATION) });
+            } else {
+                this.beforeShortFilter = this.beforeShortFilter || [];
+                this.setState({ movies: this.beforeShortFilter });
+            }
         }
     }
 
-    _filterMovies = (movies, { query, onlyShort, onlyLiked = false }) => {
-        let result = movies.filter(movie => movie.nameRU.toLowerCase().includes(query.toLowerCase()) || movie.nameEN.toLowerCase().includes(query.toLowerCase()));
-        if (onlyShort) {
-            result = result.filter(movie => movie.duration <= 40);
-        }
-        if (onlyLiked) {
-            result = result.filter(movie => movie.isLiked)
-        }
-        return result;
+    componentWillUnmount = () => {
+        const { query, onlyShort } = this.state;
+        localStorage.setItem("searchQuery", JSON.stringify({ query, onlyShort }));
     }
 
-    handleSearch = async ({ query, onlyShort }) => {
-        this.setState({ isLoading: true, movies: [] });
-        try {
-            this.filteredMovies = this._filterMovies(this.allMovies, { query, onlyShort, onlyLiked: this.props.onlySaved});
-            this.setState({ movies: this.filteredMovies.splice(0, this.preloadMoviesAmount) });
-        } catch (error) {
-            this.props.onError(error.message)
-        } finally {
-            this.setState({ isLoading: false });
+    handleSearch = async (event) => {
+        event.preventDefault();
+        this.setState({ isLoading: true });
+        this.filteredMovies = searchMovies(
+            this.allMovies,
+            { query: this.state.query, onlyShort: this.state.onlyShort, onlyLiked: this.props.onlySaved }
+        );
+        if (this.filteredMovies.length === 0) {
+            this.props.onError('Ничего не найдено');
+        } else {
+            this.setState({ movies: this.filteredMovies.splice(0, PRELOAD_MOVIES_AMOUNT) });
         }
+        this.setState({ isLoading: false });
+
     }
+
+    handleQueryChange = (query) => this.setState({ query });
+
+    handleToggleOnlyShort = (onlyShort) => this.setState({ onlyShort });
 
     handleLoadMore = () => {
         this.setState({ isLoading: true });
         setTimeout(() => {
             this.setState({
-                movies: [...this.state.movies, ...this.filteredMovies.splice(0, this.afterloadMoviesAmount)],
+                movies: [...this.state.movies, ...this.filteredMovies.splice(0, AFTERLOAD_MOVIES_AMOUNT)],
                 isLoading: false
             });
         }, 500);
@@ -132,14 +147,18 @@ export default class Library extends Component {
             <>
                 <Header />
                 <main className="library">
-                    <Search onSubmit={this.handleSearch} />
+                    <Search onSubmit={this.handleSearch}
+                            query={this.state.query}
+                            onlyShort={this.state.onlyShort}
+                            onChange={this.handleQueryChange}
+                            onToggle={this.handleToggleOnlyShort} />
                     <section className="library__movies">
                         <ul className="library__movies-list">
                             {this.state.movies.map(movie => <li key={movie.movieId} className="library__movies-item">
                                 <Movie movie={movie}
                                        onToggleLike={this.handleToggleLike}
                                        onDelete={this.handleDelete}
-                                       buttonType={this.props.onlySaved ? "delete" : "like"} />
+                                       buttonType={this.props.onlySaved ? "delete" : "like"}/>
                             </li>)}
                         </ul>
                         <article className="library__more">

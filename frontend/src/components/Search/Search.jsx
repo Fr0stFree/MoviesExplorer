@@ -4,19 +4,6 @@ import './Search.css';
 
 
 export default class Search extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            query: "",
-            onlyShort: false,
-        }
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault();
-        this.props.onSubmit(this.state);
-
-    }
 
     render() {
         return (
@@ -24,12 +11,13 @@ export default class Search extends Component {
                 <form className="search__form">
                     <div className="search__bar-container">
                         <input className="search__bar-input"
-                               value={this.state.query}
-                               onChange={(event) => this.setState({ query: event.target.value })}
+                               value={this.props.query}
+                               onChange={(event) => this.props.onChange(event.target.value)}
                                type="search"
+                               minLength="1"
                                placeholder="Фильм"
                                required />
-                        <input onClick={this.handleSubmit}
+                        <input onClick={this.props.onSubmit}
                                className="search__bar-submit"
                                type="submit"
                                value="&#8635;" />
@@ -37,10 +25,9 @@ export default class Search extends Component {
                     <div className="search__switch-container">
                         <label className="search__switch">
                             <input type="checkbox"
-                                   value={this.state.onlyShort}
-                                   onChange={() => this.setState({ onlyShort: !this.state.onlyShort })}
-                            />
-                            <span className="search__slider"></span>
+                                   checked={this.props.onlyShort}
+                                   onChange={(event) => this.props.onToggle(event.target.checked)} />
+                            <span className="search__slider "></span>
                         </label>
                         <p className="search__switch-description">Короткометражки</p>
                     </div>

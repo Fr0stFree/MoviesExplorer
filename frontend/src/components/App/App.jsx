@@ -18,14 +18,18 @@ export default class App extends Component {
         this.mainApi = new MainApi();
         this.state = {
             isTooltipOpen: false,
-            tooltipMessage: "",
+            tooltipMessage: '',
             currentUser: {
-                _id: undefined,
-                name: undefined,
-                email: undefined,
-                isAuthenticated: false,
+                _id: '648ac4fd1f36a455e78a2d32',
+                name: 'Jak',
+                email: 'fake@gmal.com',
+                isAuthenticated: Boolean(localStorage.getItem('token')),
             },
         }
+    }
+
+    componentDidMount = async () => {
+        await this.handleAuthentication()
     }
 
     componentDidUpdate = async (prevProps, prevState, snapshot) => {
@@ -38,17 +42,15 @@ export default class App extends Component {
         }
     }
 
-    componentDidMount = async () => await this.handleAuthentication()
-
     handleLogout = () => {
-        localStorage.removeItem("token");
+        localStorage.removeItem('token');
         this.setState({ currentUser: { isAuthenticated: false } });
     }
 
     handleLogin = async ({ email, password }) => {
         try {
             const { token } = await this.mainApi.login({ email, password });
-            localStorage.setItem("token", token);
+            localStorage.setItem('token', token);
             this.setState({ currentUser: { isAuthenticated: true } });
         } catch (error) {
             this.openTooltip(error.message);
@@ -57,7 +59,7 @@ export default class App extends Component {
 
     handleAuthentication = async () => {
         try {
-            const token = localStorage.getItem("token");
+            const token = localStorage.getItem('token');
             if (!token) {
                 return;
             }
@@ -71,7 +73,7 @@ export default class App extends Component {
     handleRegistration = async ({ name, email, password }) => {
         try {
             await this.mainApi.register({ name, email, password });
-            this.openTooltip(`Welcome, ${name}`);
+            await this.handleLogin({ email, password });
         } catch (error) {
             this.openTooltip(error.message);
         }
@@ -97,19 +99,19 @@ export default class App extends Component {
                         <Route path="/signup" element={<Register onSubmit={this.handleRegistration} />} />
                         <Route path="/signin" element={<Login onSubmit={this.handleLogin} />} />
                         <Route path="/profile" element={
-                            <Protected  navigateTo="/signin">
+                            <Protected navigateTo="/">
                                 <Profile onSubmit={this.handleProfileUpdate}
                                          onExtraButtonClick={this.handleLogout} />
                             </Protected>} >
                         </Route>
                         <Route path="/movies" element={
-                            <Protected navigateTo="/signin">
+                            <Protected navigateTo="/">
                                 <Library onlySaved={false}
                                          onError={(message) => this.openTooltip(message)} />
                             </Protected>} >
                         </Route>
                         <Route path="/saved-movies" element={
-                            <Protected navigateTo="/signin">
+                            <Protected navigateTo="/">
                                 <Library onlySaved={true}
                                          onError={(message) => this.openTooltip(message)} />
                             </Protected>} >

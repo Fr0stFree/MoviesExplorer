@@ -20,20 +20,12 @@ export default class Profile extends Interface {
         return 'Редактировать'
     }
 
-    get isSubmitButtonTransparent() {
-        return true
-    }
-
     get isPasswordFieldNeeded() {
         return false
     }
 
     get extraButtonLinkText() {
         return "Выйти из аккаунта"
-    }
-
-    get extraButtonRedirectTo() {
-        return "/signin"
     }
 
     get isExtraButtonDanger() {

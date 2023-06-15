@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 import './Movie.css';
 
@@ -23,13 +24,21 @@ export default class Movie extends Component {
         )
     }
 
+    get duration() {
+        const minutes = this.props.movie.duration % 60;
+        const hours = (this.props.movie.duration - minutes) / 60;
+        return `${hours}ч ${minutes}м`
+    }
+
     render() {
         return (
             <article className="movie">
                 <h3 className="movie__title">{this.props.movie.nameRU}</h3>
-                <p className="movie__duration">{this.props.movie.duration}</p>
+                <p className="movie__duration">{this.duration}</p>
                 {this.props.buttonType === "like" ? this.likeButton : this.deleteButton}
-                <img className="movie__poster" src={this.props.movie.image} alt={this.props.movie.nameRU} />
+                <Link to={this.props.movie.trailerLink} target="blank" className="movie__poster">
+                    <img className="movie__poster-image" src={this.props.movie.image} alt={this.props.movie.nameRU} />
+                </Link>
             </article>
         )
     }

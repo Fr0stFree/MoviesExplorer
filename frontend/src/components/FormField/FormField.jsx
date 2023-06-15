@@ -22,6 +22,7 @@ export default class FormField extends Component {
                        onChange={this.props.onChange}
                        className="form-field__input"
                        name={this.props.name}
+                       pattern={this.props.pattern}
                        required />
                 <span className={`form-field__error ${!this.props.isValid ? "form-field__error_active" : ""}`}>{this.props.errorMessage}
                 </span>

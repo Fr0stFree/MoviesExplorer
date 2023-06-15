@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import Logo from "../Logo/Logo";
 import FormField from "../FormField/FormField";
+import {EMAIL_PATTERN} from "../../utils/constants";
 import './Interface.css';
-import {Link} from "react-router-dom";
 
 
 export default class Interface extends Component {
@@ -18,7 +19,7 @@ export default class Interface extends Component {
             errorMessage: "",
             fields: {
                 name: new Field({ name: "name", label: "Имя", type: "text" }),
-                email: new Field({ name: "email", label: "E-mail", type: "email" }),
+                email: new Field({ name: "email", label: "E-mail", type: "email", pattern: EMAIL_PATTERN }),
                 password: new Field({ name: "password", label: "Пароль", type: "password" }),
             },
         };
@@ -66,6 +67,7 @@ export default class Interface extends Component {
                                    isValid={this.state.fields.email.isValid}
                                    label={this.state.fields.email.label}
                                    extraLabel={this.context.email}
+                                   pattern={this.state.fields.email.pattern}
                                    isShallow={this.areExtraButtonsShallow}
                         />
                     }
@@ -133,10 +135,6 @@ export default class Interface extends Component {
         return ""
     }
 
-    get isSubmitButtonTransparent() {
-        return false
-    }
-
     get extraButtonText() {
         return ""
     }
@@ -159,7 +157,7 @@ export default class Interface extends Component {
 }
 
 class Field {
-    constructor({ name, label, extraLabel = "", type, value = "", isValid = false, errorMessage = "" }) {
+    constructor({ name, label, extraLabel = "", type, value = "", isValid = false, errorMessage = "", pattern = null }) {
         this.name = name
         this.label = label
         this.extraLabel = extraLabel
@@ -167,5 +165,6 @@ class Field {
         this.value = value
         this.isValid = isValid
         this.errorMessage = errorMessage
+        this.pattern = pattern
     }
 }
