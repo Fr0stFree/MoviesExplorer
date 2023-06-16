@@ -4,7 +4,7 @@ import {
     PRELOAD_MOVIES_AMOUNT,
     AFTERLOAD_MOVIES_AMOUNT,
 } from "../../utils/constants";
-import { searchMovies, loadMovies } from "../../utils/functions";
+import { searchMovies } from "../../utils/functions";
 import MoviesApi from "../../utils/moviesApi";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -30,13 +30,8 @@ export default class Library extends Component {
     componentDidMount = async () => {
         this.setState({ isLoading: true });
         try {
-            this.allMovies = await loadMovies();
-            this.filteredMovies = searchMovies(this.allMovies, { onlyShort: this.state.onlyShort, onlyLiked: this.props.onlySaved });
-            if (this.props.onlySaved) {
-                this.setState({ movies: this.filteredMovies });
-            } else {
-                this.setState({ movies: this.filteredMovies.splice(0, PRELOAD_MOVIES_AMOUNT) });
-            }
+            this.allMovies = await this._loadMovies();
+            this._filterMovies();
         } catch (error) {
             this.props.onError(error.message);
         } finally {
@@ -46,12 +41,7 @@ export default class Library extends Component {
 
     componentDidUpdate = async (prevProps, prevState) => {
         if ((prevProps.onlySaved !== this.props.onlySaved) || (prevState.onlyShort !== this.state.onlyShort)) {
-            this.filteredMovies = searchMovies(this.allMovies, { onlyShort: this.state.onlyShort, onlyLiked: this.props.onlySaved });
-            if (this.props.onlySaved) {
-                this.setState({ movies: this.filteredMovies });
-            } else {
-                this.setState({ movies: this.filteredMovies.splice(0, PRELOAD_MOVIES_AMOUNT) });
-            }
+            this._filterMovies();
         }
     }
 
@@ -156,5 +146,38 @@ export default class Library extends Component {
                 <Footer />
             </>
         )
+    }
+
+    _filterMovies = () => {
+        this.filteredMovies = searchMovies(this.allMovies, { onlyShort: this.state.onlyShort, onlyLiked: this.props.onlySaved });
+        if (this.props.onlySaved) {
+            this.setState({ movies: this.filteredMovies });
+        } else {
+            this.setState({ movies: this.filteredMovies.splice(0, PRELOAD_MOVIES_AMOUNT) });
+        }
+    }
+
+    _loadMovies = async () => {
+        let remoteMovies = [];
+        let savedMovies = [];
+
+        if (localStorage.getItem('movies')) {
+            remoteMovies = JSON.parse(localStorage.getItem('movies'));
+            savedMovies = await this.moviesApi.getSavedMovies()
+        } else {
+            [ remoteMovies, savedMovies ] = await Promise.all([ this.moviesApi.getRemoteMovies(), this.moviesApi.getSavedMovies() ]);
+        }
+        remoteMovies.forEach(movie => {
+            const correspondingSavedMovie = savedMovies.find(savedMovie => savedMovie.movieId === movie.movieId);
+            if (correspondingSavedMovie) {
+                movie.isLiked = true;
+                movie._id = correspondingSavedMovie._id;
+            } else {
+                movie.isLiked = false;
+                movie._id = null;
+            }
+        });
+        localStorage.setItem('movies', JSON.stringify(remoteMovies));
+        return remoteMovies;
     }
 }

@@ -25,4 +25,5 @@ module.exports = {
 	MONGO_DNS: process.env.MONGO_DNS,
 	SERVER_PORT: process.env.SERVER_PORT,
 	URL_PATTERN: /^https?:(www\.)?[a-zа-яё\d\-._~:/?#[\]@!$&'()*+,;=]+#?$/i,
+	EMAIL_PATTERN: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
 };

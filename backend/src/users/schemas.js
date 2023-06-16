@@ -1,11 +1,12 @@
 const { Joi } = require('celebrate');
+const {EMAIL_PATTERN} = require("../config");
 
 const registerSchema = {
 	body: Joi.object().keys({
 		email: Joi
 			.string()
 			.required()
-			.email()
+			.pattern(EMAIL_PATTERN)
 			.lowercase(),
 		password: Joi
 			.string()
@@ -23,7 +24,7 @@ const loginSchema = {
 		email: Joi
 			.string()
 			.required()
-			.email()
+			.pattern(EMAIL_PATTERN)
 			.lowercase(),
 		password: Joi
 			.string()
@@ -41,7 +42,7 @@ const updateSchema = {
 		email: Joi
 			.string()
 			.required()
-			.email()
+			.pattern(EMAIL_PATTERN)
 			.lowercase(),
 	}),
 };

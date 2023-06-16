@@ -16,7 +16,6 @@ export default class Interface extends Component {
         this.form = React.createRef();
         this.state = {
             isFormValid: false,
-            errorMessage: "",
             fields: {
                 name: new Field({ name: "name", label: "Имя", type: "text" }),
                 email: new Field({ name: "email", label: "E-mail", type: "email", pattern: EMAIL_PATTERN }),
@@ -27,7 +26,7 @@ export default class Interface extends Component {
         this.handleExtraButtonClick = this.handleExtraButtonClick.bind(this);
     }
 
-    handleInputChange = (event) => {
+    handleInputChange(event) {
         const fieldKey = event.target.name
         const field = this.state.fields[fieldKey]
 
@@ -85,7 +84,7 @@ export default class Interface extends Component {
                     <div className="user-interface__button-container">
                         <button type="submit"
                                 disabled={!this.state.isFormValid}
-                                className={`user-interface__submit-button ${this.isSubmitButtonTransparent ? "user-interface__submit-button_transparent" : ""}`}
+                                className="user-interface__submit-button"
                         >{this.submitButtonText}</button>
                         <p className="user-interface__extra">{this.extraButtonText}&ensp;
                             <Link className={`user-interface__extra-link ${this.isExtraButtonDanger ? " user-interface__extra-link_style_danger" : ""}`}
