@@ -24,6 +24,7 @@ export default class Interface extends Component {
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleExtraButtonClick = this.handleExtraButtonClick.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     handleInputChange(event) {
