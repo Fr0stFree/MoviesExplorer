@@ -10,6 +10,7 @@ export default class Profile extends Interface {
     static contextType = CurrentUserContext;
 
     componentDidMount() {
+        this.prevContext = this.context
         this.setState({
             isFormValid: false,
             fields: {
@@ -17,6 +18,19 @@ export default class Profile extends Interface {
                 name: { ...this.state.fields.name, value: this.context.name }
             }
         })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (JSON.stringify(this.prevContext) !== JSON.stringify(this.context)) {
+            this.prevContext = this.context;
+            this.setState({
+                isFormValid: false,
+                fields: {
+                    email: { ...this.state.fields.email, value: this.context.email },
+                    name: { ...this.state.fields.name, value: this.context.name }
+                }
+            });
+        }
     }
 
     handleInputChange = (event) => {

@@ -43,11 +43,10 @@ export default class Library extends Component {
         if ((prevProps.onlySaved !== this.props.onlySaved) || (prevState.onlyShort !== this.state.onlyShort)) {
             this._filterMovies();
         }
-    }
-
-    componentWillUnmount = () => {
-        const { query, onlyShort } = this.state;
-        localStorage.setItem("searchQuery", JSON.stringify({ query, onlyShort }));
+        if ((prevState.onlyShort !== this.state.onlyShort) || (prevState.query !== this.state.query)) {
+            const { query, onlyShort } = this.state;
+            localStorage.setItem("searchQuery", JSON.stringify({ query, onlyShort }));
+        }
     }
 
     handleSearch = async (event) => {
