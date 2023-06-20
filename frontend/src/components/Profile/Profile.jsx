@@ -14,8 +14,8 @@ export default class Profile extends Interface {
         this.setState({
             isFormValid: false,
             fields: {
-                email: { ...this.state.fields.email, value: this.context.email },
-                name: { ...this.state.fields.name, value: this.context.name }
+                email: { ...this.state.fields.email, value: this.context.email, isValid: true },
+                name: { ...this.state.fields.name, value: this.context.name, isValid: true },
             }
         })
     }
@@ -26,28 +26,30 @@ export default class Profile extends Interface {
             this.setState({
                 isFormValid: false,
                 fields: {
-                    email: { ...this.state.fields.email, value: this.context.email },
-                    name: { ...this.state.fields.name, value: this.context.name }
+                    email: { ...this.state.fields.email, value: this.context.email, isValid: true },
+                    name: { ...this.state.fields.name, value: this.context.name, isValid: true },
                 }
             });
         }
     }
 
     handleInputChange = (event) => {
-        super.handleInputChange(event)
-        const { email, name } = this.state.fields
+        const { email, name } = this.state.fields;
+        const field = this.state.fields[event.target.name];
+        field.value = event.target.value
         if (email.value === this.context.email && name.value === this.context.name) {
-            const field = this.state.fields[event.target.name]
-            field.errorMessage = "Данные должны отличаться от текущих"
-            field.isValid = false
-            this.setState(prevState => ({ isFormValid: false, fields: { ...prevState.fields, [field.name]: field }}))
+            field.errorMessage = "Данные должны отличаться от текущих";
+            field.isValid = false;
+            return super.updateFormValidity();
         }
+        super.handleInputChange(event);
+
     }
 
     handleSubmit(event) {
-        event.preventDefault()
-        const email = this.state.fields.email.value
-        const name = this.state.fields.name.value
+        event.preventDefault();
+        const email = this.state.fields.email.value;
+        const name = this.state.fields.name.value;
         this.props.onSubmit({ email, name });
         this.setState({ isFormValid: false })
     }
@@ -78,6 +80,7 @@ export default class Profile extends Interface {
     }
 
     get isPasswordFieldNeeded() {
+        delete this.state.fields.password;
         return false
     }
 

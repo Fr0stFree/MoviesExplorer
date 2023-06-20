@@ -29,6 +29,7 @@ export default class Login extends Interface {
     }
 
     get isNameFieldNeeded() {
+        delete this.state.fields.name
         return false
     }
 

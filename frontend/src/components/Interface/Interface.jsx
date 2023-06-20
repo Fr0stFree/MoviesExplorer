@@ -28,22 +28,25 @@ export default class Interface extends Component {
     }
 
     handleInputChange(event) {
-        const fieldKey = event.target.name
-        const field = this.state.fields[fieldKey]
-        let isFormValid = true
-
+        const field = this.state.fields[event.target.name]
+        field.isValid = true;
+        field.errorMessage = "";
         field.value = event.target.value
-        if (!this.form.current.elements[fieldKey].validity.valid) {
+
+        if (!this.form.current.elements[field.name].validity.valid) {
             field.isValid = false;
-            field.errorMessage = this.form.current.elements[fieldKey].validationMessage;
-            isFormValid = this.form.current.checkValidity();
+            field.errorMessage = this.form.current.elements[field.name].validationMessage;
         }
         if (field.pattern && !field.value.match(field.pattern)) {
             field.isValid = false;
             field.errorMessage = `Пожалуйста, введите валидный ${field.name}.`
-            isFormValid = false;
         }
-         this.setState(prevState => ({ isFormValid, fields: { ...prevState.fields, [fieldKey]: field }}))
+        this.updateFormValidity();
+    }
+
+    updateFormValidity() {
+        const isFormValid = Object.values(this.state.fields).every(field => field.isValid);
+        this.setState(({ isFormValid, ...this.state.fields }));
     }
 
     render() {
