@@ -37,15 +37,10 @@ export default class Profile extends Interface {
         super.handleInputChange(event)
         const { email, name } = this.state.fields
         if (email.value === this.context.email && name.value === this.context.name) {
-            const errorMessage = "Данные должны отличаться от текущих"
-            this.setState({
-                fields: {
-                    ...this.state.fields,
-                    email: { ...email, isValid: false, errorMessage },
-                    name: { ...name, isValid: false, errorMessage }
-                },
-                isFormValid: false
-            })
+            const field = this.state.fields[event.target.name]
+            field.errorMessage = "Данные должны отличаться от текущих"
+            field.isValid = false
+            this.setState(prevState => ({ isFormValid: false, fields: { ...prevState.fields, [field.name]: field }}))
         }
     }
 

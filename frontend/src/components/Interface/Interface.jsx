@@ -30,11 +30,20 @@ export default class Interface extends Component {
     handleInputChange(event) {
         const fieldKey = event.target.name
         const field = this.state.fields[fieldKey]
+        let isFormValid = true
 
         field.value = event.target.value
-        field.isValid = this.form.current.elements[fieldKey].validity.valid
-        field.isValid ? field.errorMessage = "" : field.errorMessage = this.form.current.elements[fieldKey].validationMessage
-        this.setState(prevState => ({ isFormValid: this.form.current.checkValidity(), fields: { ...prevState.fields, [fieldKey]: field }}))
+        if (!this.form.current.elements[fieldKey].validity.valid) {
+            field.isValid = false;
+            field.errorMessage = this.form.current.elements[fieldKey].validationMessage;
+            isFormValid = this.form.current.checkValidity();
+        }
+        if (field.pattern && !field.value.match(field.pattern)) {
+            field.isValid = false;
+            field.errorMessage = `Пожалуйста, введите валидный ${field.name}.`
+            isFormValid = false;
+        }
+         this.setState(prevState => ({ isFormValid, fields: { ...prevState.fields, [fieldKey]: field }}))
     }
 
     render() {
@@ -67,7 +76,6 @@ export default class Interface extends Component {
                                    isValid={this.state.fields.email.isValid}
                                    label={this.state.fields.email.label}
                                    extraLabel={this.context.email}
-                                   pattern={this.state.fields.email.pattern}
                                    isShallow={this.areExtraButtonsShallow}
                         />
                     }
