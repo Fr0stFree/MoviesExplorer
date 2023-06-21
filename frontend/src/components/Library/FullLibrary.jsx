@@ -23,7 +23,7 @@ export default class Library extends Component {
         this.state = {
             isLoading: false,
             movies: [],
-            query: JSON.parse(localStorage.getItem("searchQuery"))?.query || '',
+            query: this.props.onlySaved ? "" : JSON.parse(localStorage.getItem("searchQuery"))?.query || '',
             onlyShort: JSON.parse(localStorage.getItem("searchQuery"))?.onlyShort || false,
         }
     }
@@ -42,6 +42,7 @@ export default class Library extends Component {
 
     componentDidUpdate = async (prevProps, prevState) => {
         if (prevProps.onlySaved !== this.props.onlySaved) {
+            this.props.onlySaved ? this.setState({ query: '' }) : this.setState({ query: JSON.parse(localStorage.getItem("searchQuery"))?.query || '' });
             this._filterMovies();
         }
         if ((prevState.onlyShort !== this.state.onlyShort) || (prevState.query !== this.state.query)) {
