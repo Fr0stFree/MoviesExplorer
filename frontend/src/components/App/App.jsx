@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import Protected from "../Protected";
@@ -9,7 +9,8 @@ import NotFound from "../NotFound/NotFound";
 import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
-import Library from "../Library/Library";
+import FullLibrary from "../Library/FullLibrary";
+import SavedLibrary from "../Library/SavedLibrary";
 import Tooltip from "../Tooltip/Tooltip";
 
 export default class App extends Component {
@@ -106,14 +107,12 @@ export default class App extends Component {
                         </Route>
                         <Route path="/movies" element={
                             <Protected navigateTo="/">
-                                <Library onlySaved={false}
-                                         onError={(message) => this.openTooltip(message)} />
+                                <FullLibrary onError={(message) => this.openTooltip(message)} />
                             </Protected>} >
                         </Route>
                         <Route path="/saved-movies" element={
                             <Protected navigateTo="/">
-                                <Library onlySaved={true}
-                                         onError={(message) => this.openTooltip(message)} />
+                                <SavedLibrary onError={(message) => this.openTooltip(message)} />
                             </Protected>} >
                         </Route>
                         <Route path="/" element={<Landing />} />
