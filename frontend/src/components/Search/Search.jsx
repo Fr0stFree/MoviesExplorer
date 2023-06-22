@@ -20,6 +20,7 @@ export default class Search extends Component {
                         <input onClick={this.props.onSubmit}
                                className="search__bar-submit"
                                type="submit"
+                               disabled={this.props.isDisabled}
                                value="&#8635;" />
                     </div>
                     <div className="search__switch-container">
@@ -27,7 +28,7 @@ export default class Search extends Component {
                             <input type="checkbox"
                                    checked={this.props.onlyShort}
                                    onChange={(event) => this.props.onToggle(event.target.checked)} />
-                            <span className="search__slider "></span>
+                            <span className="search__slider"></span>
                         </label>
                         <p className="search__switch-description">Короткометражки</p>
                     </div>

@@ -1,9 +1,41 @@
 import AbstractLibrary from "./AbstractLibrary";
-import { searchMovies } from "../../utils/functions";
 import { AFTERLOAD_MOVIES_AMOUNT, PRELOAD_MOVIES_AMOUNT } from "../../utils/constants";
 import React from "react";
 
 export default class FullLibrary extends AbstractLibrary {
+    constructor(props) {
+        super(props);
+        this.movieButton = 'like';
+        this.showOnlyLikedMovies = false;
+        this.preloadMoviesAmount = PRELOAD_MOVIES_AMOUNT;
+        this.afterLoadMoviesAmount = AFTERLOAD_MOVIES_AMOUNT;
+
+        const state = JSON.parse(localStorage.getItem('libraryState'));
+        this.state = {
+            isLoading: false,
+            movies: [],
+            query: state?.query || '',
+            isSearchDisabled: !(state && state.query.length !== 0),
+            onlyShort: state?.onlyShort || false,
+        }
+
+    }
+
+    componentDidMount() {
+        this.allMovies = JSON.parse(localStorage.getItem('movies')) || [];
+        this.filteredMovies = this.filterMovies(this.allMovies);
+        const moviesLimit = JSON.parse(localStorage.getItem('libraryState'))?.moviesLimit || 0
+        this.setState({ moviesLimit });
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        super.componentDidUpdate(prevProps, prevState, snapshot);
+        if ((prevState.onlyShort !== this.state.onlyShort) || (prevState.query !== this.state.query) || (prevState.movies !== this.state.movies)) {
+            const { query, onlyShort, moviesLimit } = this.state;
+            localStorage.setItem('libraryState', JSON.stringify({ query, onlyShort, moviesLimit }));
+        }
+    }
+
     handleToggleLike = async (movie) => {
         try {
             if (movie.isLiked) {
@@ -16,71 +48,9 @@ export default class FullLibrary extends AbstractLibrary {
                 movie._id = savedMovie._id;
             }
             this.setState({ movies: [...this.state.movies] });
+            this.updateMovieLocally(movie);
         } catch (error) {
             this.props.onError(error.message);
         }
-    }
-
-    handleLoadMore = () => {
-        this.setState({ isLoading: true });
-        setTimeout(() => {
-            this.setState({
-                movies: [...this.state.movies, ...this.filteredMovies.splice(0, AFTERLOAD_MOVIES_AMOUNT)],
-                isLoading: false
-            });
-        }, 500);
-    }
-
-    filterMovies = () => {
-        this.filteredMovies = searchMovies(
-            this.allMovies,
-            { query: this.state.query, onlyLiked: false, onlyShort: this.state.onlyShort },
-        );
-        const moviesAmount = this.filteredMovies.length
-        this.setState({ movies: this.filteredMovies.splice(0, PRELOAD_MOVIES_AMOUNT) });
-        return moviesAmount
-    }
-
-    loadMovies = async () => {
-        let remoteMovies = [];
-        let savedMovies = [];
-
-        if (localStorage.getItem('movies')) {
-            remoteMovies = JSON.parse(localStorage.getItem('movies'));
-            savedMovies = await this.moviesApi.getSavedMovies()
-        } else {
-            [ remoteMovies, savedMovies ] = await Promise.all([ this.moviesApi.getRemoteMovies(), this.moviesApi.getSavedMovies() ]);
-        }
-        remoteMovies.forEach(movie => {
-            const correspondingSavedMovie = savedMovies.find(savedMovie => savedMovie.movieId === movie.movieId);
-            if (correspondingSavedMovie) {
-                movie.isLiked = true;
-                movie._id = correspondingSavedMovie._id;
-            } else {
-                movie.isLiked = false;
-                movie._id = null;
-            }
-        });
-        localStorage.setItem('movies', JSON.stringify(remoteMovies));
-        return remoteMovies;
-    }
-
-    get localStorageKey() {
-        return 'allMovies'
-    }
-
-    get movieButtonType() {
-        return 'like'
-    }
-
-    get moreSection() {
-        if (this.filteredMovies.length === 0) {
-            return null;
-        }
-        return (
-            <button className="library__load-button"
-                    onClick={this.handleLoadMore}
-            >Ещё</button>
-        )
     }
 }

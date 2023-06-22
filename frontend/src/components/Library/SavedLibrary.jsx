@@ -1,37 +1,31 @@
 import AbstractLibrary from "./AbstractLibrary";
-import {searchMovies} from "../../utils/functions";
+import React from "react";
 
 export default class SavedLibrary extends AbstractLibrary {
+    constructor(props) {
+        super(props);
+        this.movieButton = 'delete'
+        this.showOnlyLikedMovies = true
+        this.preloadMoviesAmount = 100
+        this.afterLoadMoviesAmount = 100
+    }
+
+    async componentDidMount() {
+        this.allMovies = await this.loadMovies();
+        this.filteredMovies = this.allMovies.filter(movie => movie.isLiked);
+        this.setState({ moviesLimit: this.preloadMoviesAmount });
+    }
+
     handleDelete = async (movie) => {
         try {
             await this.moviesApi.deleteMovie(movie);
-            this.setState({ movies: this.state.movies.filter(m => m._id !== movie._id) });
+            this.setState({ movies: this.state.movies.filter(item => item._id !== movie._id) });
+            movie.isLiked = false;
+            movie._id = null;
+            this.updateMovieLocally(movie);
         } catch (error) {
             this.props.onError(error.message);
         }
     }
 
-    filterMovies = () => {
-        this.filteredMovies = searchMovies(
-            this.allMovies,
-            { query: this.state.query, onlyLiked: false, onlyShort: this.state.onlyShort },
-        );
-        const moviesAmount = this.filteredMovies.length
-        this.setState({ movies: this.filteredMovies });
-        return moviesAmount
-    }
-
-    loadMovies = async () => {
-        const movies = await this.moviesApi.getSavedMovies();
-        movies.forEach(movie => movie.isLiked = true);
-        return movies;
-    }
-
-    get localStorageKey() {
-        return 'savedMovies'
-    }
-
-    get movieButtonType() {
-        return 'delete'
-    }
 }
