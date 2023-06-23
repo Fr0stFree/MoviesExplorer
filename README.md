@@ -1,13 +1,17 @@
 ## Movies Explorer
 ### Описание проекта
 Веб-сайт __Movies Explorer__ - это выпускной проект курса Yandex.Practicum [Frontend-developer](https://practicum.yandex.ru/frontend-developer/). 
-Сайт представляет собой SPA-приложение для хранения кинопроизведений в личной библиотеки пользователя.
+Сайт представляет собой SPA-приложение для хранения кинопроизведений в личной библиотеки пользователя. Верстка
+адаптирована к различным устройствам _(min 320px, max 1600px width)_
+
 Реализован следующий функционал:
 
 1. [x] Регистрация
 2. [x] Авторизация и аутентификация _(стратегия - jwt-token в headers)_
 3. [x] CRUD операции с сущностью **User**
 4. [x] CRUD операции с сущностью **Movie** 
+
+---
 
 ### Стек технологий
 - Front-end: [React.js](https://react.dev/)
@@ -35,6 +39,7 @@
 <section>
     <details>
         <summary> Главная страница </summary>
+        <img src="./public/images/header.png" alt="Header" />
         <img src="./public/images/main.png" alt="Main page" />
     </details>
     <details>
