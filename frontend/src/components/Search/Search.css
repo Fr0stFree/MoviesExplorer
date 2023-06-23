@@ -66,6 +66,14 @@
   transform: scale(0.85);
 }
 
+.search__bar-submit:disabled {
+  cursor: default;
+  background-color: var(--border-color);
+  transition: none;
+  transform: none;
+  color: var(--background-secondary-color)
+}
+
 .search__switch-container {
   display: flex;
   column-gap: 12px;

@@ -35,7 +35,7 @@
   line-height: 1.2;
 }
 
-.not-found__go-back-link {
+.not-found__go-back-button {
   color: var(--link-color);
   font-family: inherit;
   font-style: normal;
@@ -44,10 +44,14 @@
   line-height: 17px;
   text-decoration: none;
   transition: opacity 0.5s ease-in-out;
-  margin-top: auto
+  margin-top: auto;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
 }
 
-.not-found__go-back-link:hover {
+.not-found__go-back-button:hover {
   opacity: 0.6;
 }
 

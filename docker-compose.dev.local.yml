@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+    mongo:
+        image: mongo:4.0.4
+        container_name: db
+        restart: always
+        volumes:
+            - ./data/db:/data/db
+        hostname: mongo
+
+    react:
+        build: ./frontend
+        container_name: frontend
+        ports:
+            - '3000:80'
+
+    express:
+        build: ./backend
+        container_name: backend
+        restart: always
+        ports:
+            - '5000:5000'
+        depends_on:
+            - mongo
+        hostname: express
+        links:
+            - mongo
+        env_file:
+            - .env.example

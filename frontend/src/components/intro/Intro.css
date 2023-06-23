@@ -55,6 +55,10 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+  flex-grow: 1;
+  height: 100%;
+  text-align: center;
+  padding-top: 10%;
 }
 
 @media (max-width: 800px) {

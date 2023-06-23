@@ -41,4 +41,5 @@
   align-items: center;
   color: var(--primary-color);
   background-color: var(--background-secondary-color);
+  min-height: 100vh;
 }

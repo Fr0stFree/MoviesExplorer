@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import Logo from "../Logo/Logo";
 import FormField from "../FormField/FormField";
+import {EMAIL_PATTERN} from "../../utils/constants";
 import './Interface.css';
-import {Link} from "react-router-dom";
 
 
 export default class Interface extends Component {
@@ -14,85 +15,43 @@ export default class Interface extends Component {
         super(props);
         this.form = React.createRef();
         this.state = {
+            isFormValid: false,
             fields: {
                 name: new Field({ name: "name", label: "Имя", type: "text" }),
-                email: new Field({ name: "email", label: "E-mail", type: "email" }),
+                email: new Field({ name: "email", label: "E-mail", type: "email", pattern: EMAIL_PATTERN }),
                 password: new Field({ name: "password", label: "Пароль", type: "password" }),
             },
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleExtraButtonClick = this.handleExtraButtonClick.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     handleInputChange(event) {
-        const fieldKey = event.target.name
-        const field = this.state.fields[fieldKey]
-
+        const field = this.state.fields[event.target.name]
+        field.isValid = true;
+        field.errorMessage = "";
         field.value = event.target.value
-        field.isValid = this.form.current.elements[fieldKey].validity.valid
-        field.isValid ? field.errorMessage = "" : field.errorMessage = this.form.current.elements[fieldKey].validationMessage
-        this.setState(prevState => ({ fields: { ...prevState.fields, [fieldKey]: field }}))
+
+        if (!this.form.current.elements[field.name].validity.valid) {
+            field.isValid = false;
+            field.errorMessage = this.form.current.elements[field.name].validationMessage;
+        }
+        if (field.pattern && !field.value.match(field.pattern)) {
+            field.isValid = false;
+            field.errorMessage = `Пожалуйста, введите валидный ${field.name}.`
+        }
+        this.updateFormValidity();
     }
 
-    handleSubmit(event) {
-        return null
-    }
-
-    get title() {
-        return ""
-    }
-
-    get isTitleCentered() {
-        return false
-    }
-
-    get isLogoVisible() {
-        return true
-    }
-
-    get isNameFieldNeeded() {
-        return true
-    }
-
-    get isEmailFieldNeeded() {
-        return true
-    }
-
-    get isPasswordFieldNeeded() {
-        return true
-    }
-
-    get submitButtonText() {
-        return ""
-    }
-
-    get isSubmitButtonTransparent() {
-        return false
-    }
-
-    get extraButtonText() {
-        return ""
-    }
-
-    get extraButtonLinkText() {
-        return ""
-    }
-
-    get extraButtonRedirectTo() {
-        return ""
-    }
-
-    get isExtraButtonDanger() {
-        return false
-    }
-
-    get areExtraButtonsShallow() {
-        return true
+    updateFormValidity() {
+        const isFormValid = Object.values(this.state.fields).every(field => field.isValid);
+        this.setState(({ isFormValid, ...this.state.fields }));
     }
 
     render() {
         return (
-            <secion className="user-interface">
+            <section className="user-interface">
                 {this.isLogoVisible && <Logo />}
                 <h2 className={`user-interface__title ${this.isTitleCentered ? "user-interface__title_centered" : ""}`}
                 >{this.title}</h2>
@@ -136,22 +95,80 @@ export default class Interface extends Component {
                     }
                     <div className="user-interface__button-container">
                         <button type="submit"
-                                className={`user-interface__submit-button ${this.isSubmitButtonTransparent ? "user-interface__submit-button_transparent" : ""}`}
+                                disabled={!this.state.isFormValid}
+                                className="user-interface__submit-button"
                         >{this.submitButtonText}</button>
                         <p className="user-interface__extra">{this.extraButtonText}&ensp;
                             <Link className={`user-interface__extra-link ${this.isExtraButtonDanger ? " user-interface__extra-link_style_danger" : ""}`}
+                                  onClick={this.handleExtraButtonClick}
                                   to={this.extraButtonRedirectTo}>{this.extraButtonLinkText}
                             </Link>
                         </p>
                     </div>
                 </form>
-            </secion>
+            </section>
         );
+    }
+
+    handleSubmit(event) {
+        return null
+    }
+
+    handleExtraButtonClick() {
+        return null
+    }
+
+    get title() {
+        return ""
+    }
+
+    get isTitleCentered() {
+        return false
+    }
+
+    get isLogoVisible() {
+        return true
+    }
+
+    get isNameFieldNeeded() {
+        return true
+    }
+
+    get isEmailFieldNeeded() {
+        return true
+    }
+
+    get isPasswordFieldNeeded() {
+        return true
+    }
+
+    get submitButtonText() {
+        return ""
+    }
+
+    get extraButtonText() {
+        return ""
+    }
+
+    get extraButtonLinkText() {
+        return ""
+    }
+
+    get extraButtonRedirectTo() {
+        return ""
+    }
+
+    get isExtraButtonDanger() {
+        return false
+    }
+
+    get areExtraButtonsShallow() {
+        return true
     }
 }
 
 class Field {
-    constructor({ name, label, extraLabel = "", type, value = "", isValid = false, errorMessage = "" }) {
+    constructor({ name, label, extraLabel = "", type, value = "", isValid = false, errorMessage = "", pattern = null }) {
         this.name = name
         this.label = label
         this.extraLabel = extraLabel
@@ -159,5 +176,6 @@ class Field {
         this.value = value
         this.isValid = isValid
         this.errorMessage = errorMessage
+        this.pattern = pattern
     }
 }

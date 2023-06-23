@@ -80,6 +80,10 @@
   line-height: 17px;
   letter-spacing: -0.04em;
   text-decoration: none;
+  flex-grow: 1;
+  height: 100%;
+  text-align: center;
+  padding-top: 25%;
 }
 
 @media (max-width: 800px) {
