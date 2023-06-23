@@ -1,52 +1,59 @@
-## Movies-Explorer
+## Movies Explorer
 ### Описание проекта
-Coming soon...
+Веб-сайт __Movies Explorer__ - это выпускной проект курса Yandex.Practicum [Frontend-developer](https://practicum.yandex.ru/frontend-developer/). 
+Сайт представляет собой SPA-приложение для хранения кинопроизведений в личной библиотеки пользователя.
+Реализован следующий функционал:
+
+1. [x] Регистрация
+2. [x] Авторизация и аутентификация _(стратегия - jwt-token в headers)_
+3. [x] CRUD операции с сущностью **User**
+4. [x] CRUD операции с сущностью **Movie** 
 
 ### Стек технологий
-- React.js
-- Express.js
-- MongoDB
-- Git + GitHub
-- Docker
-- Nginx
-- Yandex Cloud
+- Front-end: [React.js](https://react.dev/)
+- Back-end: [Express.js](https://expressjs.com/)
+- Database: [MongoDB](https://www.mongodb.com/)
+- Version Control: [Git](https://git-scm.com/) and [GitHub](https://github.com/)
+- Containerization: [Docker](https://www.docker.com/)
+- Infrastructure: [Nginx](https://nginx.org/) and [Yandex.Cloud](https://cloud.yandex.ru/)
 
 ---
 
-### <u>Дорогой ревьювер</u>
+### Запуск приложения
 
-Прошу, пожалуйста, не отклоняй работу от проверки из-за того, что проект не выложен на сервере.
-К сожалению, у меня нет возможности оплатить сервер, а промокоды были потрачены еще на прошлых курсах.
-Данный проект можно запустить локально, но для этого необходимо наличие Docker, а так же плагина к нему docker-compose
-_(желательно v2)_.
-
-Для запуска необходимо находясь в главной директории проекта ввести в терминале команду:
+Для запуска приложения необходимо наличие [Docker](https://www.docker.com/) и плагина [docker-compose](https://docs.docker.com/compose/).
+Запустить приложение можно находясь в главной директории проекта вызвав команду:
 ```bash
-docker compose -f docker-compose.dev.local.yml up --build
+ docker compose -f docker-compose.example.yml up --build
 ```
-Это может занять некоторое время. После окончания загрузки и поднятия контейнеров, приложение будет развернуто
-и доступно по адресу [localhost:3000](http://localhost:3000).
-
-### Frontend
-
-Ссылка на [макет](https://disk.yandex.ru/d/OhWcAXF5AZ7zyQ) в формате .fig
-
-Ссылка на [пулл-реквест](https://github.com/Fr0stFree/Website-Movies-Explorer/pull/5)
+После окончания загрузки и поднятия контейнеров, приложение будет развернуто и доступно по адресу [localhost:3000](http://localhost:3000).
 
 ---
 
-### Backend
+### Верстка 
 
+<section>
+    <details>
+        <summary> Главная страница </summary>
+        <img src="./public/images/main.png" alt="Main page" />
+    </details>
+    <details>
+        <summary> Библиотека </summary>
+        <img src="./public/images/movies.png" alt="Movies list"/>
+    </details>
+    <details>
+        <summary> Личный кабинет </summary>
+        <img src="./public/images/account.png" alt="Account"/>
+    </details>
+    <details>
+        <summary> Бургер-меню </summary>
+        <img src="./public/images/menu.png" alt="Burger-menu" />
+    </details>
+</section>
 
-#### Запуск сервиса локально
-Для запуска необходимо наличие локально установленной базы данных `mongodb >= 4.0.4`, `node >= 18.12.1` и пакетного 
-менеджера `npm`.
-```bash
-npm install --omit=dev
-npm run dev
-```
+---
 
-#### Endpoints
+### Эндпоинты на бэкенде
 
 <details>
 <summary> Регистрация пользователя </summary>
